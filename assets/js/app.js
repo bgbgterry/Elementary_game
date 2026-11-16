@@ -34,6 +34,7 @@
     studySubj: "idiom",  // 'idiom' | 'idiom_7_12' | 'science'
     studyGroup: "all",
     studyFocusId: null,
+    studyEngTab: "mindmap", // 'mindmap' | 'cards'
     mistakeSubj: "all",
     mistakeFrequentOnly: false,
     certSubj: "idiom",
@@ -461,7 +462,8 @@
         const subj = btn.getAttribute("data-open-study");
         const grp = btn.getAttribute("data-group") || "all";
         const fid = btn.getAttribute("data-focus-id") || null;
-        openStudyView(subj, grp, fid);
+        const engTab = btn.getAttribute("data-eng-tab") || null;
+        openStudyView(subj, grp, fid, engTab);
       };
     });
 
@@ -683,8 +685,11 @@
           </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
             ${passedCount >= levels.length ? `<button type="button" class="pill-btn warn-btn" data-open-cert="english">🏆 領取英文榮譽證書</button>` : ""}
-            <button type="button" class="pill-btn eng-btn" data-open-study="english" data-group="all">
-              📖 展開文法筆記 (${cards.length})
+            <button type="button" class="pill-btn eng-btn" data-open-study="english" data-eng-tab="mindmap">
+              🧠 四大時態心智圖
+            </button>
+            <button type="button" class="pill-btn" data-open-study="english" data-eng-tab="cards">
+              📖 文法卡片庫 (${cards.length})
             </button>
           </div>
         </div>
@@ -840,11 +845,16 @@
   }
 
   /* ---------- 圖鑑筆記溫習視圖 (#view-study) ---------- */
-  function openStudyView(subj, group, focusId) {
+  function openStudyView(subj, group, focusId, engTab) {
     state.view = "study";
     state.studySubj = subj;
     state.studyGroup = group || "all";
     state.studyFocusId = focusId != null ? String(focusId) : null;
+    if (subj === "english") {
+      if (engTab) state.studyEngTab = engTab;
+      else if (focusId) state.studyEngTab = "cards";
+      else if (!state.studyEngTab) state.studyEngTab = "mindmap";
+    }
 
     const p = curPlayer();
     if (focusId != null && p[subj]) {
@@ -855,7 +865,9 @@
     const labelMap = {
       idiom: "四上國語成語圖鑑（1～6課）",
       idiom_7_12: "四上國語成語圖鑑（7～12課）",
-      science: "四上自然科學圖鑑"
+      science: "四上自然科學圖鑑",
+      science_3: "四上第3課聲音與光圖鑑",
+      english: "四上英文文法筆記"
     };
     p.lastActivity = {
       type: "study",
@@ -877,6 +889,160 @@
     } else {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
+  }
+
+  function buildEngMindmapHtml(mm) {
+    if (!mm || !mm.branches) return "";
+    const core = mm.coreNode || {};
+    const branches = mm.branches || [];
+    const compTable = mm.comparisonTable || [];
+    const prep = mm.prepositionTips || {};
+
+    const quickNavHtml = `
+      <div class="mindmap-quicknav">
+        ${branches.map(b => `<button type="button" class="mindmap-jump-pill" data-target="branch-${esc(b.id)}">${esc(b.number)}. ${esc(b.title.split(' ')[0])}</button>`).join('')}
+        <button type="button" class="mindmap-jump-pill" data-target="mindmap-matrix">⚡ 四大時態秒懂對比</button>
+        <button type="button" class="mindmap-jump-pill" data-target="mindmap-prep">🎯 for vs since 口訣</button>
+      </div>
+    `;
+
+    const branchesHtml = branches.map(b => {
+      const examplesHtml = (b.examples || []).map(ex => `
+        <div class="example-row">
+          <span class="example-subj-badge">${esc(ex.subj)}</span>
+          <span class="example-text">${esc(ex.text)}</span>
+          <span class="example-zh">${esc(ex.zh)}</span>
+        </div>
+      `).join('');
+
+      const keywordsHtml = (b.keywords || []).map(k => `
+        <span class="keyword-chip">⏳ ${esc(k)}</span>
+      `).join('');
+
+      const formulasHtml = (b.formulas || []).map(f => `
+        <div class="branch-formula-code">${esc(f)}</div>
+      `).join('<div style="height:6px"></div>');
+
+      const rulesHtml = (b.rules || []).map(r => `<li>${esc(r)}</li>`).join('');
+
+      return `
+        <article class="mindmap-branch-card branch-${esc(b.id)}" id="branch-${esc(b.id)}">
+          <div class="branch-header">
+            <div class="branch-title-wrap">
+              <span class="branch-num-badge">${esc(b.number)}</span>
+              <h3 class="branch-title">${esc(b.title)}</h3>
+            </div>
+            <span class="branch-tagline">${esc(b.tagline)}</span>
+          </div>
+
+          <div class="branch-body">
+            <div class="branch-box">
+              <div class="branch-box-title">📌 核心觀念 (Concept)</div>
+              <p style="margin:0 0 10px;line-height:1.6;font-size:0.95rem;">${esc(b.concept)}</p>
+
+              <div class="branch-box-title">📐 句型結構公式 (Formula)</div>
+              ${formulasHtml}
+
+              <div class="branch-box-title" style="margin-top:12px;">⏳ 時間標誌關鍵字 (Keywords)</div>
+              <div class="branch-keywords-wrap">${keywordsHtml}</div>
+            </div>
+
+            <div class="branch-box">
+              <div class="branch-box-title">📝 筆記經典例句 (7 大主詞對照)</div>
+              <div class="examples-grid">
+                ${examplesHtml}
+              </div>
+
+              ${rulesHtml ? `
+                <div class="branch-box-title" style="margin-top:12px;">💡 規則心法與拼字重點</div>
+                <ul style="margin:4px 0 0 1.2rem;padding:0;font-size:0.9rem;line-height:1.5;">
+                  ${rulesHtml}
+                </ul>
+              ` : ''}
+            </div>
+
+            ${b.traps ? `
+              <div class="branch-trap-box">
+                <b>💡 易錯警示：</b>${esc(b.traps)}
+              </div>
+            ` : ''}
+          </div>
+        </article>
+      `;
+    }).join('');
+
+    const matrixRowsHtml = compTable.map(row => `
+      <tr>
+        <td><b>${esc(row.tense)}</b></td>
+        <td><span class="keyword-chip" style="font-weight:700;">${esc(row.meaning)}</span></td>
+        <td><code>${esc(row.formula)}</code></td>
+        <td>
+          <div style="font-weight:700;color:var(--eng);">${esc(row.writeExample)}</div>
+          <div style="font-size:0.85rem;color:var(--text-soft);">${esc(row.explain)}</div>
+        </td>
+        <td>
+          <div style="font-weight:700;">${esc(row.studyExample)}</div>
+        </td>
+        <td><small>${esc(row.timeClue)}</small></td>
+      </tr>
+    `).join('');
+
+    return `
+      <section class="mindmap-root-card">
+        <div class="mindmap-root-title">🌟 ${esc(core.label || "現在式四大時態核心心智圖")}</div>
+        <p class="mindmap-root-desc">${esc(core.concept || "")}</p>
+        ${quickNavHtml}
+      </section>
+
+      <section class="mindmap-branches">
+        ${branchesHtml}
+      </section>
+
+      <section class="mindmap-matrix-card" id="mindmap-matrix">
+        <h3 style="margin:0 0 6px;color:var(--eng);">⚡ 四大時態一秒速辨核心對比表 (Master Comparison Matrix)</h3>
+        <p style="margin:0 0 10px;font-size:0.92rem;color:var(--text-soft);">
+          同一個動作「寫作 (write)」與「讀書 (study)」，在四大時態下的語意與時空狀態完整對照：
+        </p>
+        <div class="mindmap-matrix-table-wrap">
+          <table class="mindmap-matrix-table">
+            <thead>
+              <tr>
+                <th>時態名稱</th>
+                <th>核心狀態</th>
+                <th>動詞公式</th>
+                <th>同動詞對照 (write)</th>
+                <th>同動詞對照 (study)</th>
+                <th>時間線索詞</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${matrixRowsHtml}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="mindmap-prep-card" id="mindmap-prep">
+        <h3 style="margin:0 0 6px;color:var(--primary);">${esc(prep.title || "🎯 for 與 since 介系詞秒殺口訣")}</h3>
+        <div class="prep-grid">
+          <div class="prep-item">
+            <h4>⏳ for ＋ 一段時間長度 (Duration)</h4>
+            <p style="margin:0;font-size:0.92rem;line-height:1.6;color:var(--text);">
+              ${esc(prep.ruleFor || "")}
+            </p>
+          </div>
+          <div class="prep-item">
+            <h4>📍 since ＋ 過去的時間起點 (Point in Time)</h4>
+            <p style="margin:0;font-size:0.92rem;line-height:1.6;color:var(--text);">
+              ${esc(prep.ruleSince || "")}
+            </p>
+          </div>
+        </div>
+        <div class="prep-mnemonic-banner">
+          ${esc(prep.quickMnemonic || "👉 口訣：『for 一段、since 一點』！")}
+        </div>
+      </section>
+    `;
   }
 
   function renderStudy(container) {
@@ -959,6 +1125,8 @@
       `;
     } else if (state.studySubj === "english") {
       const cards = ENG_DATA.cards || [];
+      const mindmap = ENG_DATA.mindmap || {};
+      const currentTab = state.studyEngTab || "mindmap";
       const groupList = [
         "all",
         "現在簡單式",
@@ -971,61 +1139,76 @@
         (c) => state.studyGroup === "all" || c.subUnit === state.studyGroup
       );
 
+      const contentHtml = currentTab === "mindmap"
+        ? buildEngMindmapHtml(mindmap)
+        : `
+          <div class="study-filter-pills">
+            ${groupList
+              .map((g) => {
+                const label = g === "all" ? `全部時態 (${cards.length})` : g;
+                return `
+                  <button type="button" class="tab-btn ${state.studyGroup === g ? "active" : ""}" data-subj="english" data-study-grp="${esc(g)}">
+                    ${esc(label)}
+                  </button>
+                `;
+              })
+              .join("")}
+          </div>
+
+          <div class="study-cards-grid">
+            ${filtered
+              .map((c) => {
+                const isFocus = String(c.id) === String(state.studyFocusId);
+                const pSubjCards = p.english || { seenCards: [] };
+                const seen = (pSubjCards.seenCards || []).includes(String(c.id));
+                return `
+                  <article class="study-card ${isFocus ? "highlight-focus" : ""}" id="study-card-${esc(c.id)}" data-card-id="${esc(c.id)}">
+                    <div class="study-card-top">
+                      <span class="sec-badge eng">${esc(c.subUnit || "文法")}・${esc(c.category || "公式")}</span>
+                      <span style="font-size:0.8rem;color:${seen ? "var(--ok)" : "var(--text-soft)"};font-weight:700">
+                        ${seen ? "✓ 已閱讀" : "點擊標記已讀"}
+                      </span>
+                    </div>
+                    <h3>${esc(c.title)}</h3>
+                    <div class="study-box">
+                      <b>📐 時態公式 (Formula)</b>
+                      <pre style="white-space:pre-wrap;margin:4px 0;font-family:inherit;font-weight:700;color:var(--eng);">${esc(c.formula)}</pre>
+                    </div>
+                    <div class="study-box">
+                      <b>📝 筆記例句 (Examples)</b>
+                      <ul style="margin:4px 0 0 1.2rem;padding:0;">
+                        ${(c.examples || []).map((ex) => `<li>${esc(ex)}</li>`).join("")}
+                      </ul>
+                    </div>
+                    ${
+                      c.tip
+                        ? `<div class="study-tip"><b>⚠️ 易錯重點與小技巧：</b>${esc(c.tip)}</div>`
+                        : ""
+                    }
+                  </article>
+                `;
+              })
+              .join("")}
+          </div>
+        `;
+
       container.innerHTML = `
         <div class="view-header">
           <button type="button" class="pill-btn" id="study-back-btn">← 返回首頁目錄</button>
-          <h2 style="margin:0">🔤 英文文法筆記（現在式四大時態 Present Tenses）</h2>
+          <h2 style="margin:0">🔤 英文文法（現在式四大時態 Present Tenses）</h2>
           <button type="button" class="pill-btn eng-btn" id="study-go-quiz-btn">🎯 前往英文文法闖關</button>
         </div>
 
-        <div class="study-filter-pills">
-          ${groupList
-            .map((g) => {
-              const label = g === "all" ? `全部時態 (${cards.length})` : g;
-              return `
-                <button type="button" class="tab-btn ${state.studyGroup === g ? "active" : ""}" data-subj="english" data-study-grp="${esc(g)}">
-                  ${esc(label)}
-                </button>
-              `;
-            })
-            .join("")}
+        <div class="eng-mode-toggle-bar">
+          <button type="button" class="tab-btn ${currentTab === "mindmap" ? "active" : ""}" id="eng-tab-mindmap">
+            🧠 四大時態核心心智圖 (Mind Map)
+          </button>
+          <button type="button" class="tab-btn ${currentTab === "cards" ? "active" : ""}" id="eng-tab-cards">
+            📚 核心文法卡片庫 (${cards.length} 張)
+          </button>
         </div>
 
-        <div class="study-cards-grid">
-          ${filtered
-            .map((c) => {
-              const isFocus = String(c.id) === String(state.studyFocusId);
-              const pSubjCards = p.english || { seenCards: [] };
-              const seen = (pSubjCards.seenCards || []).includes(String(c.id));
-              return `
-                <article class="study-card ${isFocus ? "highlight-focus" : ""}" id="study-card-${esc(c.id)}" data-card-id="${esc(c.id)}">
-                  <div class="study-card-top">
-                    <span class="sec-badge eng">${esc(c.subUnit || "文法")}・${esc(c.category || "公式")}</span>
-                    <span style="font-size:0.8rem;color:${seen ? "var(--ok)" : "var(--text-soft)"};font-weight:700">
-                      ${seen ? "✓ 已閱讀" : "點擊標記已讀"}
-                    </span>
-                  </div>
-                  <h3>${esc(c.title)}</h3>
-                  <div class="study-box">
-                    <b>📐 時態公式 (Formula)</b>
-                    <pre style="white-space:pre-wrap;margin:4px 0;font-family:inherit;font-weight:700;color:var(--eng);">${esc(c.formula)}</pre>
-                  </div>
-                  <div class="study-box">
-                    <b>📝 筆記例句 (Examples)</b>
-                    <ul style="margin:4px 0 0 1.2rem;padding:0;">
-                      ${(c.examples || []).map((ex) => `<li>${esc(ex)}</li>`).join("")}
-                    </ul>
-                  </div>
-                  ${
-                    c.tip
-                      ? `<div class="study-tip"><b>⚠️ 易錯重點與小技巧：</b>${esc(c.tip)}</div>`
-                      : ""
-                  }
-                </article>
-              `;
-            })
-            .join("")}
-        </div>
+        ${contentHtml}
       `;
     } else {
       const isSci3 = state.studySubj === "science_3";
@@ -1116,6 +1299,32 @@
     document.getElementById("study-go-quiz-btn").onclick = () => {
       startQuiz(subj, 1);
     };
+
+    const tabMindmap = document.getElementById("eng-tab-mindmap");
+    const tabCards = document.getElementById("eng-tab-cards");
+    if (tabMindmap) {
+      tabMindmap.onclick = () => {
+        state.studyEngTab = "mindmap";
+        renderStudy(container);
+      };
+    }
+    if (tabCards) {
+      tabCards.onclick = () => {
+        state.studyEngTab = "cards";
+        renderStudy(container);
+      };
+    }
+
+    container.querySelectorAll(".mindmap-jump-pill").forEach((pill) => {
+      pill.onclick = (e) => {
+        e.preventDefault();
+        const targetId = pill.getAttribute("data-target");
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      };
+    });
 
     container.querySelectorAll("[data-study-grp]").forEach((btn) => {
       btn.onclick = () => {

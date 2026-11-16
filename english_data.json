@@ -932,5 +932,313 @@
       ],
       "tip": "快速秒殺技巧：看到長度數字（如 7 hours, 3 days）選 for；看到起點時間名詞（如 morning, 2018, yesterday）選 since！"
     }
-  ]
+  ],
+  "mindmap": {
+    "title": "現在式四大時態核心心智圖 (Present Tenses Mind Map)",
+    "subtitle": "掌握現在時間軸四大時態：從日常習慣、當下進行、累積影響到不間斷持續",
+    "coreNode": {
+      "label": "Present Tenses 現在式四大時態",
+      "tagline": "時間軸核心：判斷「動作發生狀態」與「時間關聯」",
+      "concept": "以「現在」為核心基準點。英文透過動詞變化，精確傳達動作是「習慣規律」、「眼下進行」、「完成影響」、還是「不間斷持續」。"
+    },
+    "branches": [
+      {
+        "id": "simple",
+        "number": "1",
+        "title": "現在簡單式 (Present Simple)",
+        "tagline": "日常習慣・客觀真理・固定日常",
+        "color": "#059669",
+        "bgLight": "#ecfdf5",
+        "borderColor": "#a7f3d0",
+        "concept": "表示常態性、習慣性發生的動作，或自然現象與客觀事實真理。",
+        "formulas": [
+          "1. I / You / We / They + V1 (動詞原形)",
+          "2. He / She / It + V1 + s/es (第三人稱單數動詞加 s/es)"
+        ],
+        "keywords": [
+          "every day / daily",
+          "always / usually / often",
+          "sometimes / never",
+          "in the morning / evening",
+          "at 8 AM / on Sundays"
+        ],
+        "examples": [
+          {
+            "subj": "I",
+            "text": "I play football.",
+            "zh": "我踢足球。（常態休閒活動）"
+          },
+          {
+            "subj": "You",
+            "text": "You eat breakfast at 8 AM.",
+            "zh": "你在早上 8 點吃早餐。（規律生活作息）"
+          },
+          {
+            "subj": "He",
+            "text": "He writes a book.",
+            "zh": "他寫書。（常態習慣或職業）"
+          },
+          {
+            "subj": "She",
+            "text": "She speaks English fluently.",
+            "zh": "她英語說得很流利。（能力事實）"
+          },
+          {
+            "subj": "It",
+            "text": "It rains in the monsoon.",
+            "zh": "雨季常常下雨。（客觀氣候現象）"
+          },
+          {
+            "subj": "We",
+            "text": "We go to school daily.",
+            "zh": "我們每天上學。（學生固定日常）"
+          },
+          {
+            "subj": "They",
+            "text": "They watch TV in the evening.",
+            "zh": "他們傍晚看電視。（家庭例行休閒）"
+          }
+        ],
+        "rules": [
+          "一般動詞直接加 -s (plays, speaks, writes)",
+          "字尾為 -s, -sh, -ch, -x, -o 時加 -es (watches, goes, fixes)",
+          "子音 + y 時，去 y 改加 -ies (study ➔ studies, fly ➔ flies)"
+        ],
+        "traps": "⚠️ 易錯提醒：否定句與疑問句用了助動詞 do/does 之後，主要動詞一定要恢復為「原形 V1」（例如：Does he write a book? 而非 Does he writes）。"
+      },
+      {
+        "id": "continuous",
+        "number": "2",
+        "title": "現在進行式 (Present Continuous)",
+        "tagline": "眼下正在進行・此時此刻・眼見耳聽",
+        "color": "#0284c7",
+        "bgLight": "#f0f9ff",
+        "borderColor": "#bae6fd",
+        "concept": "強調在說話的「此時此刻」正在發生、眼見耳聽進行中的具體動作。",
+        "formulas": [
+          "Subject + am / is / are + verb-ing",
+          "• I ➔ am | He / She / It ➔ is | You / We / They ➔ are"
+        ],
+        "keywords": [
+          "now / right now",
+          "Look! / Listen!",
+          "at the moment",
+          "currently / these days"
+        ],
+        "examples": [
+          {
+            "subj": "I",
+            "text": "I am studying.",
+            "zh": "我正在讀書學習。（眼前正在進行）"
+          },
+          {
+            "subj": "You",
+            "text": "You are playing.",
+            "zh": "你正在玩耍/運動。"
+          },
+          {
+            "subj": "He",
+            "text": "He is writing.",
+            "zh": "他正在寫字。（手正拿著筆）"
+          },
+          {
+            "subj": "She",
+            "text": "She is reading.",
+            "zh": "她正在看書閱讀。"
+          },
+          {
+            "subj": "It",
+            "text": "It is raining.",
+            "zh": "外頭正在下著雨。"
+          },
+          {
+            "subj": "We",
+            "text": "We are speaking.",
+            "zh": "我們正在講話交談。"
+          },
+          {
+            "subj": "They",
+            "text": "They are watching.",
+            "zh": "他們正在觀看電視/比賽。"
+          }
+        ],
+        "rules": [
+          "一般動詞直接加 -ing (playing, reading, watching)",
+          "字尾為不發音 e 時，去 e 加 -ing (write ➔ writing, dance ➔ dancing)",
+          "單一短母音 + 單一子音結尾，需重複字尾字母再加 -ing (run ➔ running, swim ➔ swimming, sit ➔ sitting)"
+        ],
+        "traps": "⚠️ 易錯提醒：be 動詞 (am/is/are) 絕對不能漏掉！『He writing』是常見嚴重錯誤，必須寫『He is writing』。"
+      },
+      {
+        "id": "perfect",
+        "number": "3",
+        "title": "現在完成式 (Present Perfect)",
+        "tagline": "動作已完成・對現在有影響・人生經驗累積",
+        "color": "#d97706",
+        "bgLight": "#fffbeb",
+        "borderColor": "#fde68a",
+        "concept": "動作發生在過去某個時間點（或剛完成），但重點在於「對現在造成的結果與影響」，或強調人生中的經驗次數。",
+        "formulas": [
+          "Subject + has / have + 過去分詞 (V3 / Past Participle)",
+          "• He / She / It ➔ has + V3 | I / You / We / They ➔ have + V3"
+        ],
+        "keywords": [
+          "already (已經 - 肯定句)",
+          "yet (尚未 - 否定/疑問句)",
+          "ever / never (曾經 / 從未)",
+          "before (以前)",
+          "just (剛剛完成)",
+          "recently / so far (最近 / 到目前為止)"
+        ],
+        "examples": [
+          {
+            "subj": "I",
+            "text": "I have finished my work.",
+            "zh": "我已經完成我的工作了。（結果：現在我有空了）"
+          },
+          {
+            "subj": "You",
+            "text": "You have seen this movie.",
+            "zh": "你看過這部電影。（經驗：你已經知道劇情了）"
+          },
+          {
+            "subj": "He",
+            "text": "He has eaten lunch.",
+            "zh": "他已經吃過午餐了。（結果：現在肚子不餓）"
+          },
+          {
+            "subj": "She",
+            "text": "She has learned English.",
+            "zh": "她學過英語。（經驗：現在具備英語溝通基礎）"
+          },
+          {
+            "subj": "It",
+            "text": "It has stopped working.",
+            "zh": "它已經停止運作了。（結果：目前處於故障停擺狀態）"
+          },
+          {
+            "subj": "We",
+            "text": "We have met before.",
+            "zh": "我們以前見過面。（經驗：彼此認識）"
+          },
+          {
+            "subj": "They",
+            "text": "They have travelled to Canada.",
+            "zh": "他們去過加拿大旅行。（人生遊歷經驗）"
+          }
+        ],
+        "rules": [
+          "規則動詞過去分詞加 -ed (finished, learned, travelled)",
+          "不規則動詞 V3 必背經典：eat-ate-eaten, see-saw-seen, meet-met-met, write-wrote-written, do-did-done"
+        ],
+        "traps": "⚠️ 易錯提醒：千萬不要將過去式動詞 (V2) 誤當成過去分詞 (V3)！例如不可寫 have ate，正確必須是 have eaten。第三人稱單數務必使用 has。"
+      },
+      {
+        "id": "perfect_cont",
+        "number": "4",
+        "title": "現在完成進行式 (Present Perfect Continuous)",
+        "tagline": "過去開始・不間斷持續至今・當下仍在做",
+        "color": "#7c3aed",
+        "bgLight": "#f5f3ff",
+        "borderColor": "#ddd6fe",
+        "concept": "強調某個動作從過去某個時間點開始，一直「不間斷持續進行到現在」，而且在說話當下還在繼續進行！",
+        "formulas": [
+          "Subject + has / have + been + verb-ing",
+          "• 三寶必備公式：[助動詞 has/have] + [固定 been] + [動詞 V-ing]"
+        ],
+        "keywords": [
+          "for + 一段時間長度 (for 7 hours, for two days, for hours)",
+          "since + 過去時間起點 (since morning, since 2018, since 8 AM)",
+          "all day / all morning (一整天 / 一整個早晨)",
+          "how long...? (持續多久了？)"
+        ],
+        "examples": [
+          {
+            "subj": "I",
+            "text": "I have been studying for 7 hours.",
+            "zh": "我已經連續讀書讀了 7 個小時。（現在還在桌前苦讀）"
+          },
+          {
+            "subj": "You",
+            "text": "You have been running since morning.",
+            "zh": "你從今天早上開始就一直在跑步。（持續運動中）"
+          },
+          {
+            "subj": "He",
+            "text": "He has been working since 2018.",
+            "zh": "他從 2018 年起就一直在此工作。（持續任職至今）"
+          },
+          {
+            "subj": "She",
+            "text": "She has been waiting for you.",
+            "zh": "她一直在這裡等你。（持續等待尚未離開）"
+          },
+          {
+            "subj": "It",
+            "text": "It has been raining all day.",
+            "zh": "雨下了一整天。（此時窗外雨還沒停）"
+          },
+          {
+            "subj": "We",
+            "text": "We have been practicing cricket.",
+            "zh": "我們一直在練習板球。（訓練持續進行中）"
+          },
+          {
+            "subj": "They",
+            "text": "They have been talking for hours.",
+            "zh": "他們已經連續聊了好幾個小時。（話題還沒結束）"
+          }
+        ],
+        "rules": [
+          "結構三要素缺一不可：助動詞 has/have ＋ 必備 been ＋ 現在分詞 V-ing",
+          "介系詞法則：for 接持續時間長度（可數的時間段）；since 接過去具體起點（哪一年、幾點、早晨）"
+        ],
+        "traps": "⚠️ 易錯提醒：最常見錯誤是漏掉 been（例如寫成 has working ❌）或混淆 for 與 since。記住口訣：「for 接一段長度，since 接起點鐘點」。"
+      }
+    ],
+    "comparisonTable": [
+      {
+        "tense": "現在簡單式 (Present Simple)",
+        "meaning": "習慣規律 / 恆常真理",
+        "formula": "V1 / V-s/es",
+        "writeExample": "He writes a book.",
+        "explain": "他是位作家，寫書是他的職業或平時習慣。",
+        "studyExample": "I study English daily.",
+        "timeClue": "every day, daily, usually"
+      },
+      {
+        "tense": "現在進行式 (Present Continuous)",
+        "meaning": "眼下此時此刻正在做",
+        "formula": "am/is/are + V-ing",
+        "writeExample": "He is writing a letter.",
+        "explain": "他現在手上正握著筆，此時此刻正在寫信。",
+        "studyExample": "I am studying grammar now.",
+        "timeClue": "now, right now, Look!"
+      },
+      {
+        "tense": "現在完成式 (Present Perfect)",
+        "meaning": "過去做完，結果影響現在",
+        "formula": "has/have + V3",
+        "writeExample": "He has written a book.",
+        "explain": "他已經寫完一本書出版了，展示完成的成果。",
+        "studyExample": "I have finished my homework.",
+        "timeClue": "already, yet, just, before"
+      },
+      {
+        "tense": "現在完成進行式 (Present Perfect Continuous)",
+        "meaning": "從過去開始，持續到現在還在做",
+        "formula": "has/have + been + V-ing",
+        "writeExample": "He has been writing for 3 hours.",
+        "explain": "他已經連續坐在桌前寫了 3 小時，而且還在寫。",
+        "studyExample": "I have been studying for 7 hours.",
+        "timeClue": "for + 長度, since + 起點"
+      }
+    ],
+    "prepositionTips": {
+      "title": "🎯 for 與 since 介系詞秒殺口訣",
+      "ruleFor": "for ＋ 一段時間長度（可以計算經過了多久）：for 7 hours, for 3 days, for 2 years, for a long time",
+      "ruleSince": "since ＋ 過去的時間起點（從哪一個點開始）：since morning, since 2018, since 8:00 AM, since yesterday",
+      "quickMnemonic": "👉 口訣：『for 一段、since 一點』！只要看後面是「長度」還是「起點」就能秒答！"
+    }
+  }
 }
