@@ -19,6 +19,7 @@
   const IDIOM_DATA_7_12 = window.GAME_DATA_7_12 || { lessons: [], idioms: [], bonusIdioms: [], levels: [] };
   const SCI_DATA = window.SCIENCE_GAME_DATA || { cards: [], levels: [] };
   const SCI_DATA_3 = window.SCIENCE_GAME_DATA_3 || { cards: [], levels: [] };
+  const ENG_DATA = window.ENGLISH_GAME_DATA || { cards: [], levels: [] };
 
   const STORAGE_KEY = "emmaqq_notebook_v1";
   const THEME_KEY = "emmaqq_theme";
@@ -65,6 +66,13 @@
         mistakes: {}
       },
       science_3: {
+        passedLevels: [],
+        highScores: {},
+        seenCards: [],
+        mastery: {},
+        mistakes: {}
+      },
+      english: {
         passedLevels: [],
         highScores: {},
         seenCards: [],
@@ -119,7 +127,7 @@
       if (!pd.idiom) pd.idiom = def.idiom;
       if (!pd.idiom_7_12) pd.idiom_7_12 = def.idiom_7_12;
       if (!pd.science) pd.science = def.science;
-      ["idiom", "idiom_7_12", "science", "science_3"].forEach((s) => {
+      ["idiom", "idiom_7_12", "science", "science_3", "english"].forEach((s) => {
         if (!pd[s]) pd[s] = { passedLevels: [], highScores: {}, seenCards: [], mastery: {}, mistakes: {} };
         pd[s].passedLevels = pd[s].passedLevels || [];
         pd[s].highScores = pd[s].highScores || {};
@@ -196,7 +204,8 @@
       Object.keys((p.idiom && p.idiom.mistakes) || {}).length +
       Object.keys((p.idiom_7_12 && p.idiom_7_12.mistakes) || {}).length +
       Object.keys((p.science && p.science.mistakes) || {}).length +
-      Object.keys((p.science_3 && p.science_3.mistakes) || {}).length
+      Object.keys((p.science_3 && p.science_3.mistakes) || {}).length +
+      Object.keys((p.english && p.english.mistakes) || {}).length
     );
   }
 
@@ -222,6 +231,15 @@
       return base.concat(bonus);
     }
     return getAllIdiomCards("idiom").concat(getAllIdiomCards("idiom_7_12"));
+  }
+
+    function findEngCard(q) {
+    if (!q) return null;
+    if (q.cardId) {
+      const found = (ENG_DATA.cards || []).find((c) => c.id === q.cardId);
+      if (found) return found;
+    }
+    return null;
   }
 
   function findIdiomCard(q, subj) {
@@ -302,12 +320,14 @@
     const allIdioms2 = getAllIdiomCards("idiom_7_12");
     const sciCards1 = SCI_DATA.cards || [];
     const sciCards3 = SCI_DATA_3.cards || [];
+    const engCards = ENG_DATA.cards || [];
     const seenTotal =
       p.idiom.seenCards.length +
       p.idiom_7_12.seenCards.length +
       p.science.seenCards.length +
-      ((p.science_3 && p.science_3.seenCards) || []).length;
-    const totalCards = allIdioms1.length + allIdioms2.length + sciCards1.length + sciCards3.length;
+      ((p.science_3 && p.science_3.seenCards) || []).length +
+      ((p.english && p.english.seenCards) || []).length;
+    const totalCards = allIdioms1.length + allIdioms2.length + sciCards1.length + sciCards3.length + engCards.length;
     const mistakeCount = getTotalMistakeCount();
     const q = state.searchQuery.trim().toLowerCase();
 
@@ -328,6 +348,7 @@
     const showIdiom2 = state.subjFilter === "all" || state.subjFilter === "idiom_7_12";
     const showSci1 = state.subjFilter === "all" || state.subjFilter === "science";
     const showSci3 = state.subjFilter === "all" || state.subjFilter === "science_3";
+    const showEng = state.subjFilter === "all" || state.subjFilter === "english";
 
     container.innerHTML = `
       <section class="hero-box">
@@ -370,6 +391,9 @@
           <button type="button" class="tab-btn ${state.subjFilter === "science_3" ? "active" : ""}" data-subj="science_3">
             🔬 四上第3課
           </button>
+          <button type="button" class="tab-btn ${state.subjFilter === "english" ? "active" : ""}" data-subj="english">
+            🔤 四上英文・文法
+          </button>
         </div>
         <div class="search-box">
           <input type="search" id="home-search-input" placeholder="🔍 搜尋成語、課次或自然科學關鍵字..." value="${esc(state.searchQuery)}">
@@ -381,6 +405,7 @@
       ${showIdiom2 ? buildIdiomSectionHtml(p, q, "idiom_7_12") : ""}
       ${showSci1 ? buildSciSectionHtml(p, q, "science") : ""}
       ${showSci3 ? buildSciSectionHtml(p, q, "science_3") : ""}
+      ${showEng ? buildEngSectionHtml(p, q) : ""}
     `;
 
     const resumeBtn = document.getElementById("resume-act-btn");
@@ -562,6 +587,126 @@
         </div>
         <div class="chapter-list">
           ${chapterRowsHtml || `<p style="color:var(--text-soft)">沒有符合「${esc(state.searchQuery)}」的成語筆記。</p>`}
+        </div>
+      </section>
+    `;
+  }
+
+  
+  function buildEngSectionHtml(p, q) {
+    const cards = ENG_DATA.cards || [];
+    const levels = ENG_DATA.levels || [];
+    const pSubj = p.english || { passedLevels: [], highScores: {}, seenCards: [] };
+    const passedCount = (pSubj.passedLevels || []).length;
+
+    const groupOrder = [
+      "現在簡單式",
+      "現在進行式",
+      "現在完成式",
+      "現在完成進行式",
+      "完成式時態"
+    ];
+    const groups = {};
+    groupOrder.forEach((t) => (groups[t] = []));
+
+    cards.forEach((c) => {
+      const title = c.subUnit || "文法重點";
+      if (!groups[title]) groups[title] = [];
+      if (
+        !q ||
+        c.title.toLowerCase().includes(q) ||
+        (c.summary && c.summary.toLowerCase().includes(q)) ||
+        (c.formula && c.formula.toLowerCase().includes(q)) ||
+        title.toLowerCase().includes(q)
+      ) {
+        groups[title].push(c);
+      }
+    });
+
+    const filteredLevels = levels.filter(
+      (lv) => !q || lv.name.toLowerCase().includes(q) || (lv.subtitle && lv.subtitle.toLowerCase().includes(q))
+    );
+
+    const levelCardsHtml = filteredLevels
+      .map((lv) => {
+        const passed = (pSubj.passedLevels || []).includes(lv.level);
+        const hi = (pSubj.highScores || {})[lv.level];
+        const singleCount = (lv.questions || []).filter((x) => x.type === "single").length;
+        const fillCount = (lv.questions || []).filter((x) => x.type === "fill").length;
+        return `
+          <button type="button" class="level-card ${passed ? "passed" : ""}" data-start-quiz="1" data-subj="english" data-level="${lv.level}">
+            <div>
+              <div class="level-top">
+                <span class="level-tag">Level ${lv.level}</span>
+                <span class="level-status">${passed ? "✅ 已過關" : "🎯 待挑戰"}${hi != null ? `・最高 ${hi} 分` : ""}</span>
+              </div>
+              <h3>${esc(lv.name.replace(/^Level\s*\d+\s*[：:]\s*/, ""))}</h3>
+              <p>${esc(lv.subtitle || "")}</p>
+            </div>
+            <div class="level-foot">
+              <span>題庫 ${lv.questions.length} 題（選擇 ${singleCount} + 填空 ${fillCount}）</span>
+              <span>開始闖關 →</span>
+            </div>
+          </button>
+        `;
+      })
+      .join("");
+
+    const chapterRowsHtml = Object.keys(groups)
+      .map((gTitle) => {
+        const items = groups[gTitle];
+        if (!items || !items.length) return "";
+        const pills = items
+          .map((c) => {
+            const seen = (pSubj.seenCards || []).includes(String(c.id));
+            return `<button type="button" class="item-pill ${seen ? "seen" : ""}" data-open-study="english" data-group="${esc(gTitle)}" data-focus-id="${esc(c.id)}">${esc(c.title)}</button>`;
+          })
+          .join("");
+        return `
+          <div class="chapter-row">
+            <div class="chapter-head">
+              <b>🔤 ${esc(gTitle)}</b>
+              <span>共 ${items.length} 張文法卡</span>
+            </div>
+            <div class="item-pills">${pills}</div>
+          </div>
+        `;
+      })
+      .join("");
+
+    return `
+      <section class="subject-section eng-sec">
+        <div class="sec-header">
+          <div class="sec-title-group">
+            <span class="sec-badge eng">國小四年級英文・文法專題</span>
+            <h2>🔤 英文文法筆記與闖關（現在式四大時態 Present Tenses）</h2>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            ${passedCount >= levels.length ? `<button type="button" class="pill-btn warn-btn" data-open-cert="english">🏆 領取英文榮譽證書</button>` : ""}
+            <button type="button" class="pill-btn eng-btn" data-open-study="english" data-group="all">
+              📖 展開文法筆記 (${cards.length})
+            </button>
+          </div>
+        </div>
+        <p class="sec-subtitle">
+          以現在式四大時態筆記為基底，收錄 Level 1 (現在簡單式與進行式) 與 Level 2 (現在完成式與完成進行式)！
+          <small>每關隨機抽 10 題・含四選一選擇題與單字填空題！</small>
+        </p>
+
+        <div class="sub-block-title">
+          <span>🎯 文法闖關測驗（已過關 ${passedCount} / ${levels.length} 關）</span>
+          <small>每關抽 10 題・答對 8 題過關・答對題目自動降低重複率</small>
+        </div>
+        <div class="levels-grid">
+          ${levelCardsHtml || `<p style="color:var(--text-soft)">沒有符合搜尋條件的文法關卡。</p>`}
+        </div>
+
+        <div class="sub-block-title">
+          <span>📖 文法重點筆記（點擊查看公式、例句與陷阱解析）</span>
+          <small>已讀 ${(pSubj.seenCards || []).length} / ${cards.length} 則</small>
+        </div>
+        <div class="chapter-list">
+          ${chapterRowsHtml || `<p style="color:var(--text-soft)">沒有符合「${esc(state.searchQuery)}」的文法筆記。</p>`}
         </div>
       </section>
     `;
@@ -812,6 +957,76 @@
             .join("")}
         </div>
       `;
+    } else if (state.studySubj === "english") {
+      const cards = ENG_DATA.cards || [];
+      const groupList = [
+        "all",
+        "現在簡單式",
+        "現在進行式",
+        "現在完成式",
+        "現在完成進行式",
+        "完成式時態"
+      ];
+      const filtered = cards.filter(
+        (c) => state.studyGroup === "all" || c.subUnit === state.studyGroup
+      );
+
+      container.innerHTML = `
+        <div class="view-header">
+          <button type="button" class="pill-btn" id="study-back-btn">← 返回首頁目錄</button>
+          <h2 style="margin:0">🔤 英文文法筆記（現在式四大時態 Present Tenses）</h2>
+          <button type="button" class="pill-btn eng-btn" id="study-go-quiz-btn">🎯 前往英文文法闖關</button>
+        </div>
+
+        <div class="study-filter-pills">
+          ${groupList
+            .map((g) => {
+              const label = g === "all" ? `全部時態 (${cards.length})` : g;
+              return `
+                <button type="button" class="tab-btn ${state.studyGroup === g ? "active" : ""}" data-subj="english" data-study-grp="${esc(g)}">
+                  ${esc(label)}
+                </button>
+              `;
+            })
+            .join("")}
+        </div>
+
+        <div class="study-cards-grid">
+          ${filtered
+            .map((c) => {
+              const isFocus = String(c.id) === String(state.studyFocusId);
+              const pSubjCards = p.english || { seenCards: [] };
+              const seen = (pSubjCards.seenCards || []).includes(String(c.id));
+              return `
+                <article class="study-card ${isFocus ? "highlight-focus" : ""}" id="study-card-${esc(c.id)}" data-card-id="${esc(c.id)}">
+                  <div class="study-card-top">
+                    <span class="sec-badge eng">${esc(c.subUnit || "文法")}・${esc(c.category || "公式")}</span>
+                    <span style="font-size:0.8rem;color:${seen ? "var(--ok)" : "var(--text-soft)"};font-weight:700">
+                      ${seen ? "✓ 已閱讀" : "點擊標記已讀"}
+                    </span>
+                  </div>
+                  <h3>${esc(c.title)}</h3>
+                  <div class="study-box">
+                    <b>📐 時態公式 (Formula)</b>
+                    <pre style="white-space:pre-wrap;margin:4px 0;font-family:inherit;font-weight:700;color:var(--eng);">${esc(c.formula)}</pre>
+                  </div>
+                  <div class="study-box">
+                    <b>📝 筆記例句 (Examples)</b>
+                    <ul style="margin:4px 0 0 1.2rem;padding:0;">
+                      ${(c.examples || []).map((ex) => `<li>${esc(ex)}</li>`).join("")}
+                    </ul>
+                  </div>
+                  ${
+                    c.tip
+                      ? `<div class="study-tip"><b>⚠️ 易錯重點與小技巧：</b>${esc(c.tip)}</div>`
+                      : ""
+                  }
+                </article>
+              `;
+            })
+            .join("")}
+        </div>
+      `;
     } else {
       const isSci3 = state.studySubj === "science_3";
       const cards = isSci3 ? (SCI_DATA_3.cards || []) : (SCI_DATA.cards || []);
@@ -1023,7 +1238,11 @@
     const isMulti = !!curQ.isMulti;
     const optLabels = ["A", "B", "C", "D", "E", "F", "G", "H"];
 
-    let unitTag = qz.subj === "science_3" ? "四上第3課：聲音與光現象" : (qz.subj === "science" ? "四上自然 1～2 課" : (qz.subj === "idiom_7_12" ? "四上國語成語（7～12課）" : "四上國語成語（1～6課）"));
+    let unitTag = qz.subj === "english" ? "四上英文・文法專題" : (qz.subj === "science_3" ? "四上第3課：聲音與光現象" : (qz.subj === "science" ? "四上自然 1～2 課" : (qz.subj === "idiom_7_12" ? "四上國語成語（7～12課）" : "四上國語成語（1～6課）")));
+    if (qz.subj === "english") {
+      const ec = findEngCard(curQ);
+      if (ec && ec.subUnit) unitTag = "英文文法・" + ec.subUnit;
+    } else
     if (qz.subj === "idiom" || qz.subj === "idiom_7_12") {
       const ic = findIdiomCard(curQ, qz.subj);
       if (ic && ic.lessonTitle) unitTag = ic.lessonTitle;
@@ -1076,7 +1295,7 @@
       feedbackHtml = buildFeedbackHtml(qz.subj, curQ, qz.lastIsCorrect, qz.index + 1 === total);
     }
 
-    const badgeCls = qz.subj === "idiom_7_12" ? "idiom2" : (qz.subj === "idiom" ? "idiom" : "sci");
+    const badgeCls = qz.subj === "english" ? "eng" : (qz.subj === "idiom_7_12" ? "idiom2" : (qz.subj === "idiom" ? "idiom" : (qz.subj === "science_3" ? "sci3" : "sci")));
 
     container.innerHTML = `
       <div class="quiz-container">
@@ -1118,6 +1337,23 @@
 
           <h2 class="quiz-prompt">${esc(curQ.prompt)}</h2>
 
+          ${
+            curQ.type === "fill"
+              ? `
+            <div class="fill-container">
+              <div style="font-weight:700;color:var(--eng);display:flex;align-items:center;gap:6px">
+                <span>✏️ 請在下方空格輸入動詞的正確形式：</span>
+              </div>
+              <div class="fill-input-row">
+                <input type="text" id="quiz-fill-input" class="fill-text-input" placeholder="在此輸入英文單字（如 speaks / am studying）..." value="${esc(qz.fillAnswer || "")}" ${qz.answered ? "disabled" : ""} autocomplete="off" autocapitalize="none" spellcheck="false">
+                ${!qz.answered ? `<button type="button" class="fill-submit-btn" id="quiz-fill-submit-btn">✅ 送出答案</button>` : ""}
+              </div>
+              ${!qz.answered ? `<div style="font-size:0.85rem;color:var(--text-soft)">提示：輸入完畢後按 Enter 鍵或點擊上方「送出答案」按鈕；也可直接點選下方選項。</div>` : ""}
+            </div>
+          `
+              : ""
+          }
+
           <div class="options-list">
             ${optionsHtml}
           </div>
@@ -1136,6 +1372,38 @@
         </div>
       </div>
     `;
+
+    
+    const fillInput = document.getElementById("quiz-fill-input");
+    const fillSubmitBtn = document.getElementById("quiz-fill-submit-btn");
+
+    function handleFillSubmit() {
+      if (!fillInput || qz.answered) return;
+      const val = (fillInput.value || "").trim();
+      if (!val) {
+        fillInput.focus();
+        return;
+      }
+      qz.fillAnswer = val;
+      const cleanUser = val.toLowerCase().replace(/\s+/g, " ");
+      const cleanAns = String(curQ.answer || "").trim().toLowerCase().replace(/\s+/g, " ");
+      const isOk = cleanUser === cleanAns;
+      finalizeQuestionAnswer(qz, curQ, isOk);
+      renderQuizQuestion(container);
+    }
+
+    if (fillSubmitBtn) {
+      fillSubmitBtn.onclick = handleFillSubmit;
+    }
+    if (fillInput && !qz.answered) {
+      fillInput.onkeydown = (e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          handleFillSubmit();
+        }
+      };
+      setTimeout(() => fillInput.focus(), 50);
+    }
 
     document.getElementById("quiz-exit-btn").onclick = () => {
       state.view = "home";
@@ -1269,6 +1537,19 @@
       } else if (curQ.hint) {
         detailHtml = `<div class="feedback-detail"><b>💡 解析：</b>${esc(curQ.hint)}</div>`;
       }
+    } else if (subj === "english") {
+      const card = findEngCard(curQ);
+      if (card) {
+        detailHtml = `
+          <div class="feedback-detail">
+            <div><b>🔤 【${esc(card.title)}】</b>（${esc(card.subUnit || "時態公式")}）</div>
+            <div style="margin-top:4px"><b>時態公式：</b><pre style="white-space:pre-wrap;margin:4px 0;font-family:inherit;font-weight:700;color:var(--eng);">${esc(card.formula)}</pre></div>
+            <div style="margin-top:4px"><b>💡 解析：</b>${esc(curQ.hint)}</div>
+          </div>
+        `;
+      } else if (curQ.hint) {
+        detailHtml = `<div class="feedback-detail"><b>💡 解析：</b>${esc(curQ.hint)}</div>`;
+      }
     } else {
       const card = findSciCard(curQ);
       detailHtml = `
@@ -1387,6 +1668,7 @@
     if (state.mistakeSubj === "all" || state.mistakeSubj === "idiom_7_12") combined = combined.concat(idiom2Mistakes);
     if (state.mistakeSubj === "all" || state.mistakeSubj === "science") combined = combined.concat(sciMistakes);
     if (state.mistakeSubj === "all" || state.mistakeSubj === "science_3") combined = combined.concat(sci3Mistakes);
+    if (state.mistakeSubj === "all" || state.mistakeSubj === "english") combined = combined.concat(engMistakes);
 
     if (state.mistakeFrequentOnly) {
       combined = combined.filter((m) => m.wrongCount >= 2);
@@ -1530,6 +1812,7 @@
     const isIdiom1 = state.certSubj === "idiom";
     const isIdiom2 = state.certSubj === "idiom_7_12";
     const isSci3 = state.certSubj === "science_3";
+    const isEng = state.certSubj === "english";
     const today = new Date().toLocaleDateString("zh-TW");
     const certSubjectName = isIdiom2
       ? "【國語成語大挑戰（第 7～12 課）】"
@@ -1537,6 +1820,8 @@
       ? "【國語成語大挑戰（第 1～6 課）】"
       : isSci3
       ? "【自然科學探究大挑戰（第 3 課：聲音與光）】"
+      : isEng
+      ? "【英文文法專題大挑戰（現在式四大時態）】"
       : "【自然科學探究大挑戰（第 1～2 課）】";
 
     const certDesc = isIdiom2
@@ -1545,6 +1830,8 @@
       ? "第 1～6 課 36 個成語與 5 大關卡"
       : isSci3
       ? "第 3 課聲音振動傳播、光反射與 8 大關卡"
+      : isEng
+      ? "現在簡單式、現在進行式、現在完成式、現在完成進行式 2 大關卡全通關"
       : "第 1～2 課地表岩石、水生生物與 8 大關卡";
 
     container.innerHTML = `
@@ -1697,9 +1984,9 @@
     initTheme();
     const defaultSubj = document.body.getAttribute("data-default-subj");
     const urlSubj = new URLSearchParams(window.location.search).get("subj");
-    if (["idiom", "idiom_7_12", "science", "science_3"].includes(urlSubj)) {
+    if (["idiom", "idiom_7_12", "science", "science_3", "english"].includes(urlSubj)) {
       state.subjFilter = urlSubj;
-    } else if (["idiom", "idiom_7_12", "science", "science_3"].includes(defaultSubj)) {
+    } else if (["idiom", "idiom_7_12", "science", "science_3", "english"].includes(defaultSubj)) {
       state.subjFilter = defaultSubj;
     }
     render();
