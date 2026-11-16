@@ -18,6 +18,7 @@
   const IDIOM_DATA_1_6 = window.GAME_DATA || { lessons: [], idioms: [], bonusIdioms: [], levels: [] };
   const IDIOM_DATA_7_12 = window.GAME_DATA_7_12 || { lessons: [], idioms: [], bonusIdioms: [], levels: [] };
   const SCI_DATA = window.SCIENCE_GAME_DATA || { cards: [], levels: [] };
+  const SCI_DATA_3 = window.SCIENCE_GAME_DATA_3 || { cards: [], levels: [] };
 
   const STORAGE_KEY = "emmaqq_notebook_v1";
   const THEME_KEY = "emmaqq_theme";
@@ -57,6 +58,13 @@
         mistakes: {}
       },
       science: {
+        passedLevels: [],
+        highScores: {},
+        seenCards: [],
+        mastery: {},
+        mistakes: {}
+      },
+      science_3: {
         passedLevels: [],
         highScores: {},
         seenCards: [],
@@ -111,7 +119,7 @@
       if (!pd.idiom) pd.idiom = def.idiom;
       if (!pd.idiom_7_12) pd.idiom_7_12 = def.idiom_7_12;
       if (!pd.science) pd.science = def.science;
-      ["idiom", "idiom_7_12", "science"].forEach((s) => {
+      ["idiom", "idiom_7_12", "science", "science_3"].forEach((s) => {
         if (!pd[s]) pd[s] = { passedLevels: [], highScores: {}, seenCards: [], mastery: {}, mistakes: {} };
         pd[s].passedLevels = pd[s].passedLevels || [];
         pd[s].highScores = pd[s].highScores || {};
@@ -185,9 +193,10 @@
   function getTotalMistakeCount() {
     const p = curPlayer();
     return (
-      Object.keys(p.idiom.mistakes).length +
-      Object.keys(p.idiom_7_12.mistakes).length +
-      Object.keys(p.science.mistakes).length
+      Object.keys((p.idiom && p.idiom.mistakes) || {}).length +
+      Object.keys((p.idiom_7_12 && p.idiom_7_12.mistakes) || {}).length +
+      Object.keys((p.science && p.science.mistakes) || {}).length +
+      Object.keys((p.science_3 && p.science_3.mistakes) || {}).length
     );
   }
 
@@ -291,9 +300,14 @@
 
     const allIdioms1 = getAllIdiomCards("idiom");
     const allIdioms2 = getAllIdiomCards("idiom_7_12");
-    const sciCards = SCI_DATA.cards || [];
-    const seenTotal = p.idiom.seenCards.length + p.idiom_7_12.seenCards.length + p.science.seenCards.length;
-    const totalCards = allIdioms1.length + allIdioms2.length + sciCards.length;
+    const sciCards1 = SCI_DATA.cards || [];
+    const sciCards3 = SCI_DATA_3.cards || [];
+    const seenTotal =
+      p.idiom.seenCards.length +
+      p.idiom_7_12.seenCards.length +
+      p.science.seenCards.length +
+      ((p.science_3 && p.science_3.seenCards) || []).length;
+    const totalCards = allIdioms1.length + allIdioms2.length + sciCards1.length + sciCards3.length;
     const mistakeCount = getTotalMistakeCount();
     const q = state.searchQuery.trim().toLowerCase();
 
@@ -312,7 +326,8 @@
 
     const showIdiom1 = state.subjFilter === "all" || state.subjFilter === "idiom";
     const showIdiom2 = state.subjFilter === "all" || state.subjFilter === "idiom_7_12";
-    const showSci = state.subjFilter === "all" || state.subjFilter === "science";
+    const showSci1 = state.subjFilter === "all" || state.subjFilter === "science";
+    const showSci3 = state.subjFilter === "all" || state.subjFilter === "science_3";
 
     container.innerHTML = `
       <section class="hero-box">
@@ -350,7 +365,10 @@
             📘 四上成語 7～12 課
           </button>
           <button type="button" class="tab-btn ${state.subjFilter === "science" ? "active" : ""}" data-subj="science">
-            🌿 四上・自然科學
+            🌿 四上1~2課
+          </button>
+          <button type="button" class="tab-btn ${state.subjFilter === "science_3" ? "active" : ""}" data-subj="science_3">
+            🔬 四上第3課
           </button>
         </div>
         <div class="search-box">
@@ -361,7 +379,8 @@
 
       ${showIdiom1 ? buildIdiomSectionHtml(p, q, "idiom") : ""}
       ${showIdiom2 ? buildIdiomSectionHtml(p, q, "idiom_7_12") : ""}
-      ${showSci ? buildSciSectionHtml(p, q) : ""}
+      ${showSci1 ? buildSciSectionHtml(p, q, "science") : ""}
+      ${showSci3 ? buildSciSectionHtml(p, q, "science_3") : ""}
     `;
 
     const resumeBtn = document.getElementById("resume-act-btn");
@@ -548,17 +567,31 @@
     `;
   }
 
-  function buildSciSectionHtml(p, q) {
-    const levels = SCI_DATA.levels || [];
-    const cards = SCI_DATA.cards || [];
-    const passedCount = p.science.passedLevels.length;
+  function buildSciSectionHtml(p, q, subj = "science") {
+    const isSci3 = subj === "science_3";
+    const sciObj = isSci3 ? SCI_DATA_3 : SCI_DATA;
+    const levels = sciObj.levels || [];
+    const cards = sciObj.cards || [];
+    const playerSubjData = isSci3 ? (p.science_3 || { passedLevels: [], highScores: {}, seenCards: [] }) : p.science;
+    const passedCount = (playerSubjData.passedLevels || []).length;
 
-    const groupOrder = [
-      "第一課：地表環境與岩石沙土",
-      "活動1：認識水域環境",
-      "活動2：水生生物的外形與構造",
-      "活動3：愛護水生生物與環境"
-    ];
+    const groupOrder = isSci3
+      ? [
+          "活動1：聲音的產生與振動",
+          "活動2：聲音的大小與強弱",
+          "活動3：聲音的高低與音調",
+          "活動4：聲音傳播介質與噪音防治",
+          "活動5：光的直線行進與影子大探索",
+          "活動6：光的反射原理與鏡面成像",
+          "活動7：生活中的聲光科技與反光器具",
+          "活動8：第三課終極綜合挑戰與科學閱讀探究"
+        ]
+      : [
+          "第一課：地表環境與岩石沙土",
+          "活動1：認識水域環境",
+          "活動2：水生生物的外形與構造",
+          "活動3：愛護水生生物與環境"
+        ];
     const groups = {};
     groupOrder.forEach((t) => (groups[t] = []));
 
@@ -582,11 +615,11 @@
 
     const levelCardsHtml = filteredLevels
       .map((lv) => {
-        const passed = p.science.passedLevels.includes(lv.level);
-        const hi = p.science.highScores[lv.level];
+        const passed = (playerSubjData.passedLevels || []).includes(lv.level);
+        const hi = (playerSubjData.highScores || {})[lv.level];
         const multiCount = (lv.questions || []).filter((x) => x.isMulti).length;
         return `
-          <button type="button" class="level-card ${passed ? "passed" : ""}" data-start-quiz="1" data-subj="science" data-level="${lv.level}">
+          <button type="button" class="level-card ${passed ? "passed" : ""}" data-start-quiz="1" data-subj="${subj}" data-level="${lv.level}">
             <div>
               <div class="level-top">
                 <span class="level-tag">Level ${lv.level}</span>
@@ -608,11 +641,11 @@
       .map((gTitle) => {
         const items = groups[gTitle];
         if (!items || !items.length) return "";
-        const displayTitle = gTitle.startsWith("活動") ? `第二課・${gTitle}` : gTitle;
+        const displayTitle = gTitle.startsWith("活動") ? (isSci3 ? `第3課・${gTitle}` : `第二課・${gTitle}`) : gTitle;
         const pills = items
           .map((c) => {
-            const seen = p.science.seenCards.includes(String(c.id));
-            return `<button type="button" class="item-pill ${seen ? "seen" : ""}" data-open-study="science" data-group="${esc(gTitle)}" data-focus-id="${esc(c.id)}">${esc(c.title)}</button>`;
+            const seen = (playerSubjData.seenCards || []).includes(String(c.id));
+            return `<button type="button" class="item-pill ${seen ? "seen" : ""}" data-open-study="${subj}" data-group="${esc(gTitle)}" data-focus-id="${esc(c.id)}">${esc(c.title)}</button>`;
           })
           .join("");
         return `
@@ -780,14 +813,27 @@
         </div>
       `;
     } else {
-      const cards = SCI_DATA.cards || [];
-      const groupList = [
-        "all",
-        "第一課：地表環境與岩石沙土",
-        "活動1：認識水域環境",
-        "活動2：水生生物的外形與構造",
-        "活動3：愛護水生生物與環境"
-      ];
+      const isSci3 = state.studySubj === "science_3";
+      const cards = isSci3 ? (SCI_DATA_3.cards || []) : (SCI_DATA.cards || []);
+      const groupList = isSci3
+        ? [
+            "all",
+            "活動1：聲音的產生與振動",
+            "活動2：聲音的大小與強弱",
+            "活動3：聲音的高低與音調",
+            "活動4：聲音傳播介質與噪音防治",
+            "活動5：光的直線行進與影子大探索",
+            "活動6：光的反射原理與鏡面成像",
+            "活動7：生活中的聲光科技與反光器具",
+            "活動8：第三課終極綜合挑戰與科學閱讀探究"
+          ]
+        : [
+            "all",
+            "第一課：地表環境與岩石沙土",
+            "活動1：認識水域環境",
+            "活動2：水生生物的外形與構造",
+            "活動3：愛護水生生物與環境"
+          ];
       const filtered = cards.filter(
         (c) => state.studyGroup === "all" || c.activityTitle === state.studyGroup
       );
@@ -795,16 +841,16 @@
       container.innerHTML = `
         <div class="view-header">
           <button type="button" class="pill-btn" id="study-back-btn">← 返回首頁目錄</button>
-          <h2 style="margin:0">🌿 四上・自然科學重點圖鑑（第 1～2 課）</h2>
-          <button type="button" class="pill-btn sci-btn" id="study-go-quiz-btn">🎯 前往自然闖關</button>
+          <h2 style="margin:0">${isSci3 ? "🔬 四上 第3課 有趣的聲音與光重點圖鑑" : "🌿 四上1~2課 自然重點圖鑑（地表岩石＆水生生物）"}</h2>
+          <button type="button" class="pill-btn ${isSci3 ? "sci3-btn" : "sci-btn"}" id="study-go-quiz-btn">🎯 前往${isSci3 ? "第3課" : "第1～2課"}闖關</button>
         </div>
 
         <div class="study-filter-pills">
           ${groupList
             .map((g) => {
-              const label = g === "all" ? `全部單元 (${cards.length})` : g.startsWith("活動") ? `第二課・${g}` : g;
+              const label = g === "all" ? `全部單元 (${cards.length})` : isSci3 ? `第3課・${g}` : (g.startsWith("活動") ? `第二課・${g}` : g);
               return `
-                <button type="button" class="tab-btn ${state.studyGroup === g ? "active" : ""}" data-subj="science" data-study-grp="${esc(g)}">
+                <button type="button" class="tab-btn ${state.studyGroup === g ? "active" : ""}" data-subj="${state.studySubj}" data-study-grp="${esc(g)}">
                   ${esc(label)}
                 </button>
               `;
@@ -816,11 +862,12 @@
           ${filtered
             .map((c) => {
               const isFocus = String(c.id) === String(state.studyFocusId);
-              const seen = p.science.seenCards.includes(String(c.id));
+              const pSubjCards = (isSci3 ? p.science_3 : p.science) || { seenCards: [] };
+              const seen = (pSubjCards.seenCards || []).includes(String(c.id));
               return `
                 <article class="study-card ${isFocus ? "highlight-focus" : ""}" id="study-card-${esc(c.id)}" data-card-id="${esc(c.id)}">
                   <div class="study-card-top">
-                    <span class="sec-badge sci">${esc(c.activityTitle)}・${esc(c.tag || "核心概念")}</span>
+                    <span class="sec-badge ${isSci3 ? "sci3" : "sci"}">${esc(c.activityTitle)}・${esc(c.tag || "核心概念")}</span>
                     <span style="font-size:0.8rem;color:${seen ? "var(--ok)" : "var(--text-soft)"};font-weight:700">
                       ${seen ? "✓ 已閱讀" : "點擊標記已讀"}
                     </span>
@@ -976,7 +1023,7 @@
     const isMulti = !!curQ.isMulti;
     const optLabels = ["A", "B", "C", "D", "E", "F", "G", "H"];
 
-    let unitTag = qz.subj === "science" ? "四上自然科學" : (qz.subj === "idiom_7_12" ? "四上國語成語（7～12課）" : "四上國語成語（1～6課）");
+    let unitTag = qz.subj === "science_3" ? "四上第3課：聲音與光現象" : (qz.subj === "science" ? "四上自然 1～2 課" : (qz.subj === "idiom_7_12" ? "四上國語成語（7～12課）" : "四上國語成語（1～6課）"));
     if (qz.subj === "idiom" || qz.subj === "idiom_7_12") {
       const ic = findIdiomCard(curQ, qz.subj);
       if (ic && ic.lessonTitle) unitTag = ic.lessonTitle;
@@ -1339,6 +1386,7 @@
     if (state.mistakeSubj === "all" || state.mistakeSubj === "idiom") combined = combined.concat(idiom1Mistakes);
     if (state.mistakeSubj === "all" || state.mistakeSubj === "idiom_7_12") combined = combined.concat(idiom2Mistakes);
     if (state.mistakeSubj === "all" || state.mistakeSubj === "science") combined = combined.concat(sciMistakes);
+    if (state.mistakeSubj === "all" || state.mistakeSubj === "science_3") combined = combined.concat(sci3Mistakes);
 
     if (state.mistakeFrequentOnly) {
       combined = combined.filter((m) => m.wrongCount >= 2);
@@ -1481,17 +1529,22 @@
   function renderCert(container) {
     const isIdiom1 = state.certSubj === "idiom";
     const isIdiom2 = state.certSubj === "idiom_7_12";
+    const isSci3 = state.certSubj === "science_3";
     const today = new Date().toLocaleDateString("zh-TW");
     const certSubjectName = isIdiom2
       ? "【國語成語大挑戰（第 7～12 課）】"
       : isIdiom1
       ? "【國語成語大挑戰（第 1～6 課）】"
-      : "【自然科學探究大挑戰】";
+      : isSci3
+      ? "【自然科學探究大挑戰（第 3 課：聲音與光）】"
+      : "【自然科學探究大挑戰（第 1～2 課）】";
 
     const certDesc = isIdiom2
       ? "第 7～12 課 36 個成語與 5 大關卡"
       : isIdiom1
       ? "第 1～6 課 36 個成語與 5 大關卡"
+      : isSci3
+      ? "第 3 課聲音振動傳播、光反射與 8 大關卡"
       : "第 1～2 課地表岩石、水生生物與 8 大關卡";
 
     container.innerHTML = `
@@ -1644,9 +1697,9 @@
     initTheme();
     const defaultSubj = document.body.getAttribute("data-default-subj");
     const urlSubj = new URLSearchParams(window.location.search).get("subj");
-    if (["idiom", "idiom_7_12", "science"].includes(urlSubj)) {
+    if (["idiom", "idiom_7_12", "science", "science_3"].includes(urlSubj)) {
       state.subjFilter = urlSubj;
-    } else if (["idiom", "idiom_7_12", "science"].includes(defaultSubj)) {
+    } else if (["idiom", "idiom_7_12", "science", "science_3"].includes(defaultSubj)) {
       state.subjFilter = defaultSubj;
     }
     render();
