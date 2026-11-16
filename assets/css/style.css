@@ -26,6 +26,12 @@
   --idiom-soft: #fff1f2;
   --idiom-border: #fecdd3;
 
+  /* 四上國語成語 7~12 課：皇室藍系 */
+  --idiom2: #2563eb;
+  --idiom2-soft: #eff6ff;
+  --idiom2-border: #bfdbfe;
+
+
   /* 四上自然科學：翠綠海洋色系 */
   --sci: #0d9488;
   --sci-soft: #f0fdfa;
@@ -73,6 +79,11 @@
   --idiom: #fb7185;
   --idiom-soft: rgba(244, 63, 94, 0.15);
   --idiom-border: rgba(251, 113, 133, 0.35);
+
+  --idiom2: #60a5fa;
+  --idiom2-soft: rgba(37, 99, 235, 0.16);
+  --idiom2-border: rgba(96, 165, 250, 0.35);
+
 
   --sci: #2dd4bf;
   --sci-soft: rgba(20, 184, 166, 0.15);
@@ -1129,4 +1140,32 @@ body {
   .quiz-card {
     padding: 18px;
   }
+}
+
+
+/* 7~12課成語樣式 */
+.pill-btn.idiom2-btn {
+  background: var(--idiom2-soft);
+  color: var(--idiom2);
+  border-color: var(--idiom2-border);
+}
+
+.tab-btn.active[data-subj="idiom_7_12"] {
+  background: var(--idiom2);
+  border-color: var(--idiom2);
+  color: #ffffff;
+}
+
+.subject-section.idiom2-sec {
+  border-top: 4px solid var(--idiom2);
+}
+
+.sec-badge.idiom2 {
+  background: var(--idiom2-soft);
+  color: var(--idiom2);
+  border: 1px solid var(--idiom2-border);
+}
+
+.idiom2-sec .level-foot {
+  color: var(--idiom2);
 }
