@@ -1,14 +1,14 @@
 {
-  "title": "國小四年級英文・文法專題（現在式四大時態 Present Tenses）",
+  "title": "國小六年級英文・文法專題（現在式四大時態 Present Tenses）",
   "unit": "英文",
   "subUnit": "文法",
-  "totalQuestions": 52,
+  "totalQuestions": 60,
   "totalCards": 8,
   "levels": [
     {
       "level": 1,
       "name": "Level 1：現在簡單式 ＆ 現在進行式 (Present Simple & Continuous)",
-      "subtitle": "掌握日常習慣與此時此刻動詞變化（含選擇題與填空題）",
+      "subtitle": "掌握國小六年級日常規律與此時此刻動詞變化（含四選一選擇題與單字填空題）",
       "icon": "⚡",
       "questions": [
         {
@@ -16,22 +16,22 @@
           "cardId": 1,
           "type": "single",
           "subUnit": "現在簡單式",
-          "prompt": "【選擇題】\"She ________ (speak) English fluently.\" 根據現在簡單式公式，括號中應選哪一個動詞形式？",
+          "prompt": "【選擇題】\"She ________ (speak) English fluently in English class.\" 根據現在簡單式第三人稱單數規則，應選哪一個動詞？",
           "options": [
             "speaks",
             "speak",
             "speaking",
-            "is speaks"
+            "is speak"
           ],
           "answer": "speaks",
-          "hint": "主詞 She 是第三人稱單數，在現在簡單式中動詞要加 -s，所以選 speaks。"
+          "hint": "主詞 She 是第三人稱單數，在現在簡單式中動詞要加 -s，故選 speaks。"
         },
         {
           "id": "ENG_L1_02",
           "cardId": 1,
           "type": "single",
           "subUnit": "現在簡單式",
-          "prompt": "【選擇題】\"We ________ to school daily.\" 根據現在簡單式規則，括號中應填入哪一個動詞？",
+          "prompt": "【選擇題】\"We ________ (go) to elementary school by bus daily.\" 根據現在簡單式規則，主詞是 We 時動詞應選？",
           "options": [
             "go",
             "goes",
@@ -39,14 +39,14 @@
             "are go"
           ],
           "answer": "go",
-          "hint": "主詞 We 是第一人稱複數，現在簡單式使用原形動詞 V1，故填 go。"
+          "hint": "主詞 We 是第一人稱複數，現在簡單式直接使用原形動詞 (V1) go。"
         },
         {
           "id": "ENG_L1_03",
-          "cardId": 1,
+          "cardId": 2,
           "type": "single",
           "subUnit": "現在簡單式",
-          "prompt": "【選擇題】\"He ________ (write) a book every year.\" 哪一個動詞形式最正確？",
+          "prompt": "【選擇題】\"My father ________ (write) interesting science stories every evening.\" 括號中動詞的正確形式為？",
           "options": [
             "writes",
             "write",
@@ -54,161 +54,236 @@
             "is write"
           ],
           "answer": "writes",
-          "hint": "主詞 He 是第三人稱單數，動詞 write 必須加上 -s 變成 writes。"
+          "hint": "主詞 My father 相當於 He（第三人稱單數），一般動詞加 -s 變成 writes。"
         },
         {
           "id": "ENG_L1_04",
           "cardId": 2,
           "type": "single",
           "subUnit": "現在簡單式",
-          "prompt": "【選擇題】\"They ________ TV in the evening.\" 哪一個動詞填入最恰當？",
+          "prompt": "【選擇題】\"Tom ________ (watch) the evening news with his grandparents every day.\" 哪一個動詞變化正確？",
           "options": [
-            "watch",
             "watches",
+            "watchs",
             "watching",
-            "are watch"
+            "watch"
           ],
-          "answer": "watch",
-          "hint": "主詞 They 為第三人稱複數，在現在簡單式中搭配原形動詞 watch。"
+          "answer": "watches",
+          "hint": "動詞 watch 字尾為 -ch，第三人稱單數時需加上 -es 變成 watches。"
         },
         {
           "id": "ENG_L1_05",
-          "cardId": 2,
+          "cardId": 1,
           "type": "single",
           "subUnit": "現在簡單式",
-          "prompt": "【選擇題】\"It ________ (rain) in the monsoon season.\" 請問動詞的正確變化是？",
+          "prompt": "【選擇題】\"In Taiwan, it ________ (rain) heavily during the summer typhoon season.\" 描述客觀自然現象時動詞應為？",
           "options": [
             "rains",
             "rain",
-            "raining",
-            "is rains"
+            "is rain",
+            "raining"
           ],
           "answer": "rains",
-          "hint": "主詞 It 是第三人稱單數代名詞，動詞 rain 需加 -s 寫成 rains。"
+          "hint": "主詞 It 是第三人稱單數，描述客觀氣候事實使用現在簡單式，動詞 rain 加上 -s 變成 rains。"
         },
         {
           "id": "ENG_L1_06",
-          "cardId": 3,
+          "cardId": 2,
           "type": "single",
-          "subUnit": "現在進行式",
-          "prompt": "【選擇題】\"Look! He ________ (write) a letter right now.\" 依現在進行式公式，括號中應填入？",
+          "subUnit": "現在簡單式",
+          "prompt": "【選擇題】\"Emma ________ (study) hard for the math contest every weekend.\" 遇上子音加 y 結尾的動詞，變化應為？",
           "options": [
-            "is writing",
-            "are writing",
-            "writes",
-            "writing"
+            "studies",
+            "studys",
+            "studying",
+            "study"
           ],
-          "answer": "is writing",
-          "hint": "現在進行式公式為 [主詞 + am/is/are + V-ing]，主詞 He 搭配 is，write 去 e 加 ing 變成 writing。"
+          "answer": "studies",
+          "hint": "study 字尾為「子音 d + y」，三單動詞需「去 y 改加 -ies」，故為 studies。"
         },
         {
           "id": "ENG_L1_07",
-          "cardId": 3,
+          "cardId": 1,
           "type": "single",
-          "subUnit": "現在進行式",
-          "prompt": "【選擇題】\"I ________ (study) in the library at the moment.\" 應選哪一個選項？",
+          "subUnit": "現在簡單式",
+          "prompt": "【選擇題】\"________ your brother play baseball after school every Friday?\" 現在簡單式的三單疑問句助動詞應選？",
           "options": [
-            "am studying",
-            "is studying",
-            "are studying",
-            "studies"
+            "Does",
+            "Do",
+            "Is",
+            "Are"
           ],
-          "answer": "am studying",
-          "hint": "主詞 I 搭配的 be 動詞是 am，加上 study-ing 構成 am studying。"
+          "answer": "Does",
+          "hint": "主詞 your brother 是第三人稱單數，一般動詞的疑問句需用助動詞 Does 開頭。"
         },
         {
           "id": "ENG_L1_08",
-          "cardId": 3,
+          "cardId": 1,
           "type": "single",
-          "subUnit": "現在進行式",
-          "prompt": "【選擇題】\"Listen! The students ________ (speak) English with their teacher.\" 應選？",
+          "subUnit": "現在簡單式",
+          "prompt": "【選擇題】\"I usually ________ (eat) a nutritious breakfast at 7:30 AM.\" 應選哪一個動詞形式？",
           "options": [
-            "are speaking",
-            "is speaking",
-            "speaks",
-            "speaking"
+            "eat",
+            "eats",
+            "eating",
+            "am eat"
           ],
-          "answer": "are speaking",
-          "hint": "主詞 The students 是複數，be 動詞用 are，動詞加 ing 變成 are speaking。"
+          "answer": "eat",
+          "hint": "主詞 I 配對原形動詞 V1，故填 eat。"
         },
         {
           "id": "ENG_L1_09",
           "cardId": 3,
           "type": "single",
           "subUnit": "現在進行式",
-          "prompt": "【選擇題】\"Take an umbrella with you. It ________ (rain) outside now.\" 哪一個選項正確？",
+          "prompt": "【選擇題】\"Look! He ________ (write) a thank-you note to his teacher right now.\" 依現在進行式公式，應填入？",
+          "options": [
+            "is writing",
+            "writing",
+            "writes",
+            "are writing"
+          ],
+          "answer": "is writing",
+          "hint": "看到「Look!」與「right now」表示當下正在進行，公式為 be + V-ing。主詞 He 配 is，write 去 e 加 ing 變成 is writing。"
+        },
+        {
+          "id": "ENG_L1_10",
+          "cardId": 3,
+          "type": "single",
+          "subUnit": "現在進行式",
+          "prompt": "【選擇題】\"I ________ (study) in the quiet school library at the moment.\" 應選哪一個選項？",
+          "options": [
+            "am studying",
+            "is studying",
+            "are studying",
+            "study"
+          ],
+          "answer": "am studying",
+          "hint": "主詞 I 的 be 動詞為 am，加 V-ing 形成 am studying。"
+        },
+        {
+          "id": "ENG_L1_11",
+          "cardId": 3,
+          "type": "single",
+          "subUnit": "現在進行式",
+          "prompt": "【選擇題】\"Listen! The students ________ (speak) English with foreign guests in the hall.\" 應選哪一項？",
+          "options": [
+            "are speaking",
+            "is speaking",
+            "am speaking",
+            "speaks"
+          ],
+          "answer": "are speaking",
+          "hint": "主詞 The students 是複數名詞，be 動詞使用 are，故為 are speaking。"
+        },
+        {
+          "id": "ENG_L1_12",
+          "cardId": 3,
+          "type": "single",
+          "subUnit": "現在進行式",
+          "prompt": "【選擇題】\"Take an umbrella! It ________ (rain) outside now.\" 哪一個選項正確？",
           "options": [
             "is raining",
             "rains",
             "are raining",
-            "raining"
+            "rain"
           ],
           "answer": "is raining",
-          "hint": "有 now 表示當前正在下雨，主詞 It 搭配 is raining。"
+          "hint": "時間副詞 now 代表眼下正在下雨，主詞 It 配 is，動詞加 ing 形成 is raining。"
         },
         {
-          "id": "ENG_L1_10",
+          "id": "ENG_L1_13",
           "cardId": 4,
           "type": "single",
           "subUnit": "現在進行式",
-          "prompt": "【選擇題】動詞 \"run\" 在現在進行式中加上 -ing 時，正確的拼字為？",
+          "prompt": "【選擇題】動詞 \"run\" 在操場跑步，變成現在進行式 (-ing) 時的正確拼字為？",
           "options": [
             "running",
             "runing",
             "runed",
-            "runnings"
+            "runs"
           ],
           "answer": "running",
-          "hint": "run 是單一短母音 u + 單一子音 n，必須「重複字尾 n」再加 -ing，故為 running。"
+          "hint": "run 是「單一短母音 u + 單一子音 n」，字尾必須「重複字尾字母」再加 -ing，故為 running。"
         },
         {
-          "id": "ENG_L1_11",
+          "id": "ENG_L1_14",
           "cardId": 4,
           "type": "single",
           "subUnit": "現在進行式",
-          "prompt": "【選擇題】動詞 \"write\" 變成現在分詞 (-ing) 時，正確的拼寫方式為？",
+          "prompt": "【選擇題】動詞 \"swim\" (游泳) 在現在進行式中，正確的現在分詞拼寫為？",
           "options": [
-            "writing",
-            "writeing",
-            "writting",
-            "writes"
+            "swimming",
+            "swiming",
+            "swims",
+            "swimmed"
           ],
-          "answer": "writing",
-          "hint": "write 字尾為不發音的 e，規則為「去 e 加 ing」，寫作 writing。"
+          "answer": "swimming",
+          "hint": "swim 符合「子音+短母音+子音」結構，需重複字尾 m 再加 -ing，拼作 swimming。"
         },
         {
-          "id": "ENG_L1_12",
-          "cardId": 1,
-          "type": "single",
-          "subUnit": "現在簡單式",
-          "prompt": "【選擇題】\"You ________ (eat) breakfast at 8 AM every morning.\" 括號中應填入？",
-          "options": [
-            "eat",
-            "eats",
-            "are eating",
-            "eating"
-          ],
-          "answer": "eat",
-          "hint": "主詞 You 在現在簡單式中搭配原形動詞 eat。"
-        },
-        {
-          "id": "ENG_L1_13",
+          "id": "ENG_L1_15",
           "cardId": 3,
           "type": "single",
           "subUnit": "現在進行式",
-          "prompt": "【選擇題】\"They ________ (watch) a basketball game right now.\" 哪一個選項正確？",
+          "prompt": "【選擇題】\"The children ________ (play) a wonderful board game in the living room now.\" 應填入？",
+          "options": [
+            "are playing",
+            "is playing",
+            "am playing",
+            "plays"
+          ],
+          "answer": "are playing",
+          "hint": "The children（孩子們）是複數名詞，be 動詞用 are，動詞加 ing 為 are playing。"
+        },
+        {
+          "id": "ENG_L1_16",
+          "cardId": 3,
+          "type": "single",
+          "subUnit": "現在進行式",
+          "prompt": "【選擇題】\"They ________ (watch) an educational documentary on TV right now.\" 哪一個選項正確？",
           "options": [
             "are watching",
             "is watching",
             "watches",
-            "watching"
+            "watch"
           ],
           "answer": "are watching",
-          "hint": "主詞 They 為複數，現在進行式搭配 are + watching。"
+          "hint": "主詞 They 為複數，配 are watching。"
         },
         {
-          "id": "ENG_L1_14",
-          "cardId": 2,
+          "id": "ENG_L1_17",
+          "cardId": 1,
+          "type": "single",
+          "subUnit": "現在簡單式",
+          "prompt": "【選擇題】\"David doesn't ________ (play) computer games on weekdays.\" 助動詞 doesn't 後方動詞應如何變化？",
+          "options": [
+            "play",
+            "plays",
+            "playing",
+            "is play"
+          ],
+          "answer": "play",
+          "hint": "口訣：助動詞 does / doesn't 出現時，主要動詞一律打回「原形 V1」，故選 play。"
+        },
+        {
+          "id": "ENG_L1_18",
+          "cardId": 4,
+          "type": "single",
+          "subUnit": "現在進行式",
+          "prompt": "【選擇題】動詞 \"make\" (製作) 加上 -ing 形成現在分詞時，正確拼法是？",
+          "options": [
+            "making",
+            "makeing",
+            "makking",
+            "makes"
+          ],
+          "answer": "making",
+          "hint": "字尾為不發音的 e 時，必須「去掉 e 再加 -ing」，故拼為 making。"
+        },
+        {
+          "id": "ENG_L1_19",
+          "cardId": 1,
           "type": "single",
           "subUnit": "現在簡單式",
           "prompt": "【選擇題】下列哪一個句子的現在簡單式動詞變化是「完全正確」的？",
@@ -216,197 +291,172 @@
             "Tom plays football after school.",
             "Tom play football after school.",
             "Tom is play football after school.",
-            "Tom playss football after school."
+            "Tom playing football after school."
           ],
           "answer": "Tom plays football after school.",
-          "hint": "Tom 是第三人稱單數，play 直接加 s 變成 plays。"
-        },
-        {
-          "id": "ENG_L1_15",
-          "cardId": 1,
-          "type": "fill",
-          "subUnit": "現在簡單式",
-          "prompt": "【填空題】請填入動詞正確形式：I ________ (play) football every Saturday afternoon.",
-          "answer": "play",
-          "options": [
-            "play",
-            "plays",
-            "playing",
-            "am playing"
-          ],
-          "hint": "主詞 I 在現在簡單式中使用原形動詞 play。"
-        },
-        {
-          "id": "ENG_L1_16",
-          "cardId": 1,
-          "type": "fill",
-          "subUnit": "現在簡單式",
-          "prompt": "【填空題】請填入動詞正確形式：She ________ (speak) English fluently.",
-          "answer": "speaks",
-          "options": [
-            "speaks",
-            "speak",
-            "speaking",
-            "is speaking"
-          ],
-          "hint": "主詞 She 是第三人稱單數，speak 加 s 變成 speaks。"
-        },
-        {
-          "id": "ENG_L1_17",
-          "cardId": 1,
-          "type": "fill",
-          "subUnit": "現在簡單式",
-          "prompt": "【填空題】請填入動詞正確形式：He ________ (write) a book every year.",
-          "answer": "writes",
-          "options": [
-            "writes",
-            "write",
-            "writing",
-            "is writing"
-          ],
-          "hint": "主詞 He 是第三人稱單數，write 需加 s 寫成 writes。"
-        },
-        {
-          "id": "ENG_L1_18",
-          "cardId": 1,
-          "type": "fill",
-          "subUnit": "現在簡單式",
-          "prompt": "【填空題】請填入動詞正確形式：We ________ (go) to school daily by bus.",
-          "answer": "go",
-          "options": [
-            "go",
-            "goes",
-            "going",
-            "are going"
-          ],
-          "hint": "主詞 We 搭配原形動詞 go。"
-        },
-        {
-          "id": "ENG_L1_19",
-          "cardId": 2,
-          "type": "fill",
-          "subUnit": "現在簡單式",
-          "prompt": "【填空題】請填入動詞正確形式：My brother ________ (watch) TV in the evening.",
-          "answer": "watches",
-          "options": [
-            "watches",
-            "watch",
-            "watching",
-            "is watching"
-          ],
-          "hint": "主詞 My brother 為第三人稱單數，動詞 watch 字尾為 -ch，加 -es 寫成 watches。"
+          "hint": "Tom 是第三人稱單數，動詞 play 需加 -s 變成 plays。"
         },
         {
           "id": "ENG_L1_20",
-          "cardId": 2,
-          "type": "fill",
-          "subUnit": "現在簡單式",
-          "prompt": "【填空題】請填入動詞正確形式：It ________ (rain) a lot during the monsoon.",
-          "answer": "rains",
+          "cardId": 3,
+          "type": "single",
+          "subUnit": "現在進行式",
+          "prompt": "【選擇題】\"Why ________ you ________ (cry), little girl?\" 現在進行式疑問句結構應為？",
           "options": [
-            "rains",
-            "rain",
-            "raining",
-            "is raining"
+            "are / crying",
+            "is / crying",
+            "do / cry",
+            "are / cry"
           ],
-          "hint": "主詞 It 為第三人稱單數，動詞 rain 加上 -s 寫成 rains。"
+          "answer": "are / crying",
+          "hint": "主詞是 you，現在進行式疑問句為 Why are you crying?"
         },
         {
           "id": "ENG_L1_21",
-          "cardId": 3,
+          "cardId": 1,
           "type": "fill",
-          "subUnit": "現在進行式",
-          "prompt": "【填空題】請填入現在進行式動詞形式（兩字）：I ________ (study) for my English test right now.",
-          "answer": "am studying",
+          "subUnit": "現在簡單式",
+          "prompt": "【填空題】請填入動詞正確形式：I ________ (play) football with my classmates every Saturday.",
           "options": [
-            "am studying",
-            "is studying",
-            "are studying",
-            "studying"
+            "play",
+            "plays",
+            "am playing"
           ],
-          "hint": "現在進行式公式：am + studying。"
+          "answer": "play",
+          "hint": "主詞 I 在現在簡單式中使用動詞原形 play。"
         },
         {
           "id": "ENG_L1_22",
-          "cardId": 3,
+          "cardId": 1,
           "type": "fill",
-          "subUnit": "現在進行式",
-          "prompt": "【填空題】請填入現在進行式動詞形式（兩字）：You ________ (play) games on the computer right now.",
-          "answer": "are playing",
+          "subUnit": "現在簡單式",
+          "prompt": "【填空題】請填入動詞正確形式：She ________ (speak) English fluently in front of the audience.",
           "options": [
-            "are playing",
-            "is playing",
-            "am playing",
-            "playing"
+            "speaks",
+            "speak",
+            "is speaking"
           ],
-          "hint": "主詞 You 搭配 are + playing。"
+          "answer": "speaks",
+          "hint": "主詞 She 為第三人稱單數，動詞 speak 加 -s 變成 speaks。"
         },
         {
           "id": "ENG_L1_23",
-          "cardId": 3,
+          "cardId": 2,
           "type": "fill",
-          "subUnit": "現在進行式",
-          "prompt": "【填空題】請填入現在進行式動詞形式（兩字）：She ________ (read) an interesting storybook at the moment.",
-          "answer": "is reading",
+          "subUnit": "現在簡單式",
+          "prompt": "【填空題】請填入動詞正確形式：He ________ (write) an article for the school magazine every month.",
           "options": [
-            "is reading",
-            "are reading",
-            "am reading",
-            "reading"
+            "writes",
+            "write",
+            "is writing"
           ],
-          "hint": "主詞 She 搭配 is + reading。"
+          "answer": "writes",
+          "hint": "主詞 He 為三單，動詞 write 加 -s 寫作 writes。"
         },
         {
           "id": "ENG_L1_24",
-          "cardId": 4,
+          "cardId": 1,
           "type": "fill",
-          "subUnit": "現在進行式",
-          "prompt": "【填空題】請填入現在進行式動詞形式（兩字）：Look! He ________ (write) his homework carefully.",
-          "answer": "is writing",
+          "subUnit": "現在簡單式",
+          "prompt": "【填空題】請填入動詞正確形式：We ________ (go) to the science museum every summer vacation.",
           "options": [
-            "is writing",
-            "are writing",
-            "am writing",
-            "writes"
+            "go",
+            "goes",
+            "are going"
           ],
-          "hint": "He 搭配 is，write 去 e 加 ing 寫作 is writing。"
+          "answer": "go",
+          "hint": "主詞 We 是第一人稱複數，現在簡單式直接使用原形動詞 go。"
         },
         {
           "id": "ENG_L1_25",
-          "cardId": 3,
+          "cardId": 2,
           "type": "fill",
-          "subUnit": "現在進行式",
-          "prompt": "【填空題】請填入現在進行式動詞形式（兩字）：Listen! We ________ (speak) English together.",
-          "answer": "are speaking",
+          "subUnit": "現在簡單式",
+          "prompt": "【填空題】請填入動詞正確形式：My brother ________ (watch) news programs on TV in the evening.",
           "options": [
-            "are speaking",
-            "is speaking",
-            "am speaking",
-            "speaks"
+            "watches",
+            "watch",
+            "watching"
           ],
-          "hint": "主詞 We 搭配 are + speaking。"
+          "answer": "watches",
+          "hint": "My brother 為單數主詞，watch 字尾為 ch，需加上 -es 變成 watches。"
         },
         {
           "id": "ENG_L1_26",
           "cardId": 3,
           "type": "fill",
           "subUnit": "現在進行式",
-          "prompt": "【填空題】請填入現在進行式動詞形式（兩字）：The children ________ (watch) a movie in the living room now.",
-          "answer": "are watching",
+          "prompt": "【填空題】請填入現在進行式動詞形式（兩字）：I ________ (study) for my final graduation exam right now.",
+          "options": [
+            "am studying",
+            "is studying",
+            "are studying"
+          ],
+          "answer": "am studying",
+          "hint": "主詞 I 配 am，study 加 ing 變成 am studying。"
+        },
+        {
+          "id": "ENG_L1_27",
+          "cardId": 3,
+          "type": "fill",
+          "subUnit": "現在進行式",
+          "prompt": "【填空題】請填入現在進行式動詞形式（兩字）：Look! He ________ (write) his homework on the whiteboard.",
+          "options": [
+            "is writing",
+            "writes",
+            "am writing"
+          ],
+          "answer": "is writing",
+          "hint": "主詞 He 配 is，write 去 e 加 ing 寫成 is writing。"
+        },
+        {
+          "id": "ENG_L1_28",
+          "cardId": 3,
+          "type": "fill",
+          "subUnit": "現在進行式",
+          "prompt": "【填空題】請填入現在進行式動詞形式（兩字）：Listen! We ________ (speak) English with our teacher.",
+          "options": [
+            "are speaking",
+            "is speaking",
+            "speaks"
+          ],
+          "answer": "are speaking",
+          "hint": "主詞 We 配 are，加上 speaking 形成 are speaking。"
+        },
+        {
+          "id": "ENG_L1_29",
+          "cardId": 3,
+          "type": "fill",
+          "subUnit": "現在進行式",
+          "prompt": "【填空題】請填入現在進行式動詞形式（兩字）：The students ________ (watch) an interesting movie in the hall now.",
           "options": [
             "are watching",
             "is watching",
-            "am watching",
-            "watches"
+            "watch"
           ],
-          "hint": "The children 是複數主詞，搭配 are + watching。"
+          "answer": "are watching",
+          "hint": "複數名詞 The students 配 are watching。"
+        },
+        {
+          "id": "ENG_L1_30",
+          "cardId": 3,
+          "type": "fill",
+          "subUnit": "現在進行式",
+          "prompt": "【填空題】請填入現在進行式動詞形式（兩字）：Take your jacket! It ________ (rain) heavily outside now.",
+          "options": [
+            "is raining",
+            "rains",
+            "are raining"
+          ],
+          "answer": "is raining",
+          "hint": "主詞 It 配 is，加上 raining 形成 is raining。"
         }
       ]
     },
     {
       "level": 2,
       "name": "Level 2：現在完成式 ＆ 現在完成進行式 (Present Perfect & Continuous)",
-      "subtitle": "精通已完成經驗與持續動作公式（含選擇題與填空題）",
+      "subtitle": "掌握經驗累積、成果影響與持續時間（含四選一選擇題與單字填空題）",
       "icon": "🌟",
       "questions": [
         {
@@ -414,90 +464,90 @@
           "cardId": 5,
           "type": "single",
           "subUnit": "現在完成式",
-          "prompt": "【選擇題】\"I ________ (finish) my work already.\" 根據現在完成式公式 [has/have + V3]，應填入？",
+          "prompt": "【選擇題】\"I ________ (finish) my graduation project already.\" 根據現在完成式公式 [has/have + V3]，應填入？",
           "options": [
             "have finished",
             "has finished",
-            "am finished",
-            "finishing"
+            "finished",
+            "am finishing"
           ],
           "answer": "have finished",
-          "hint": "主詞 I 搭配 have，finish 的過去分詞加 ed 是 finished，故為 have finished。"
+          "hint": "主詞 I 使用 have，搭配規則動詞過去分詞 finished，故為 have finished。"
         },
         {
           "id": "ENG_L2_02",
           "cardId": 5,
           "type": "single",
           "subUnit": "現在完成式",
-          "prompt": "【選擇題】\"He ________ (eat) his lunch already.\" 括號中動詞的現在完成式正確形式為？",
+          "prompt": "【選擇題】\"He ________ (eat) his delicious lunch already.\" 括號中動詞的現在完成式正確形式為？",
           "options": [
             "has eaten",
             "have eaten",
             "has ate",
-            "is eaten"
+            "have ate"
           ],
           "answer": "has eaten",
-          "hint": "主詞 He 搭配 has；eat 的三態為 eat - ate - eaten，過去分詞是 eaten，因此是 has eaten。"
+          "hint": "主詞 He 是第三人稱單數用 has，動詞 eat 的過去分詞 V3 為 eaten，故選 has eaten。"
         },
         {
           "id": "ENG_L2_03",
           "cardId": 5,
           "type": "single",
           "subUnit": "現在完成式",
-          "prompt": "【選擇題】\"You ________ (see) this popular movie before.\" 括號中應選哪一項？",
+          "prompt": "【選擇題】\"You ________ (see) this world-famous painting before.\" 括號中應選哪一項？",
           "options": [
             "have seen",
             "has seen",
             "have saw",
-            "are seen"
+            "saw"
           ],
           "answer": "have seen",
-          "hint": "主詞 You 搭配 have；動詞 see 的三態為 see - saw - seen，V3 是 seen，故為 have seen。"
+          "hint": "主詞 You 配 have，see 的過去分詞是 seen，形成 have seen。"
         },
         {
           "id": "ENG_L2_04",
           "cardId": 5,
           "type": "single",
           "subUnit": "現在完成式",
-          "prompt": "【選擇題】\"She ________ (learn) English for three years.\" 應填入哪一個形式？",
+          "prompt": "【選擇題】\"She ________ (learn) English in Taipei for five years.\" 應填入哪一個形式？",
           "options": [
             "has learned",
             "have learned",
-            "has learn",
-            "is learned"
+            "learns",
+            "is learning"
           ],
           "answer": "has learned",
-          "hint": "主詞 She 搭配 has，learn 的過去分詞是 learned，故選 has learned。"
+          "hint": "主詞 She 為三單用 has，動詞過去分詞為 learned，故為 has learned。"
         },
         {
           "id": "ENG_L2_05",
           "cardId": 5,
           "type": "single",
           "subUnit": "現在完成式",
-          "prompt": "【選擇題】\"The old clock ________ (stop) working.\" 哪一個選項正確？",
+          "prompt": "【選擇題】\"The old grandfather clock in the living room ________ (stop) working.\" 哪一個選項正確？",
           "options": [
             "has stopped",
             "have stopped",
-            "has stop",
-            "is stopping"
+            "stopped",
+            "stopping"
           ],
           "answer": "has stopped",
-          "hint": "The old clock 是單數主詞，搭配 has；stop 重複 p 加 ed 變成 stopped。"
+          "hint": "clock 是單數名詞用 has，stop 重複 p 加 ed 為 stopped，故為 has stopped。"
         },
         {
           "id": "ENG_L2_06",
-          "cardId": 5,
+          "cardId": 6,
           "type": "single",
           "subUnit": "現在完成式",
-          "prompt": "【選擇題】\"We ________ (meet) each other before.\" 應選哪一項？",
+          "prompt": "【選擇題】\"We ________ (meet) the new English teacher before.\" meet 的過去分詞形式正確者為？",
           "options": [
             "have met",
-            "has met",
             "have meet",
-            "are met"
+            "has met",
+            "have meeting"
           ],
           "answer": "have met",
-          "hint": "主詞 We 搭配 have；動詞 meet 的三態是 meet - met - met，V3 是 met。"
+          "hint": "meet 的動詞三態為 meet - met - met，We 搭配 have met。"
         },
         {
           "id": "ENG_L2_07",
@@ -508,18 +558,33 @@
           "options": [
             "have travelled",
             "has travelled",
-            "have travel",
-            "are travelled"
+            "travelled",
+            "are travelling"
           ],
           "answer": "have travelled",
-          "hint": "主詞 They 搭配 have + travelled。"
+          "hint": "主詞 They 為複數用 have，搭配過去分詞 travelled。"
         },
         {
           "id": "ENG_L2_08",
+          "cardId": 6,
+          "type": "single",
+          "subUnit": "現在完成式",
+          "prompt": "【選擇題】\"Have you ever ________ (be) to Sun Moon Lake in Taiwan?\" 括號中應填入？",
+          "options": [
+            "been",
+            "be",
+            "was",
+            "being"
+          ],
+          "answer": "been",
+          "hint": "be 動詞的過去分詞 V3 是 been，Have you ever been to... 表示「你曾經去過…嗎？」。"
+        },
+        {
+          "id": "ENG_L2_09",
           "cardId": 7,
           "type": "single",
           "subUnit": "現在完成進行式",
-          "prompt": "【選擇題】\"I ________ (study) for 7 hours.\" 依現在完成進行式公式 [has/have + been + V-ing]，應填入？",
+          "prompt": "【選擇題】\"I ________ (study) for 7 hours without any rest.\" 依現在完成進行式公式 [has/have + been + V-ing]，應填入？",
           "options": [
             "have been studying",
             "has been studying",
@@ -527,14 +592,14 @@
             "am studying"
           ],
           "answer": "have been studying",
-          "hint": "公式：I + have + been + studying。"
+          "hint": "主詞 I 配 have，再加上固定 been 與 V-ing (studying)，形成 have been studying。"
         },
         {
-          "id": "ENG_L2_09",
+          "id": "ENG_L2_10",
           "cardId": 7,
           "type": "single",
           "subUnit": "現在完成進行式",
-          "prompt": "【選擇題】\"You ________ (run) since this morning.\" 哪一個選項完全正確？",
+          "prompt": "【選擇題】\"You look tired! You ________ (run) in the stadium since this morning.\" 哪一個選項完全正確？",
           "options": [
             "have been running",
             "has been running",
@@ -542,44 +607,44 @@
             "are running"
           ],
           "answer": "have been running",
-          "hint": "主詞 You 搭配 have been，run 重複 n 加 ing 變成 running。"
-        },
-        {
-          "id": "ENG_L2_10",
-          "cardId": 7,
-          "type": "single",
-          "subUnit": "現在完成進行式",
-          "prompt": "【選擇題】\"He ________ (work) at this company since 2018.\" 應填入？",
-          "options": [
-            "has been working",
-            "have been working",
-            "is been working",
-            "has working"
-          ],
-          "answer": "has been working",
-          "hint": "主詞 He 搭配 has been working。"
+          "hint": "You 搭配 have been running，強調從早晨至今不間斷持續跑步。"
         },
         {
           "id": "ENG_L2_11",
           "cardId": 7,
           "type": "single",
           "subUnit": "現在完成進行式",
-          "prompt": "【選擇題】\"She ________ (wait) for you at the bus stop for two hours.\" 哪一個選項正確？",
+          "prompt": "【選擇題】\"Dr. Chen ________ (work) at this hospital since 2018.\" 應填入？",
           "options": [
-            "has been waiting",
-            "have been waiting",
-            "is waiting",
-            "has waited been"
+            "has been working",
+            "have been working",
+            "is working",
+            "has worked"
           ],
-          "answer": "has been waiting",
-          "hint": "主詞 She 搭配 has + been + waiting。"
+          "answer": "has been working",
+          "hint": "主詞 Dr. Chen 是第三人稱單數，用 has been working，強調長年持續任職。"
         },
         {
           "id": "ENG_L2_12",
           "cardId": 7,
           "type": "single",
           "subUnit": "現在完成進行式",
-          "prompt": "【選擇題】\"Look at the wet ground! It ________ (rain) all day.\" 應填入？",
+          "prompt": "【選擇題】\"She ________ (wait) for the school bus for thirty minutes.\" 哪一個選項正確？",
+          "options": [
+            "has been waiting",
+            "have been waiting",
+            "is waiting",
+            "has waited"
+          ],
+          "answer": "has been waiting",
+          "hint": "主詞 She 為三單用 has，三寶組合為 has been waiting。"
+        },
+        {
+          "id": "ENG_L2_13",
+          "cardId": 7,
+          "type": "single",
+          "subUnit": "現在完成進行式",
+          "prompt": "【選擇題】\"Look at the puddles! It ________ (rain) all day long.\" 應填入？",
           "options": [
             "has been raining",
             "have been raining",
@@ -587,14 +652,14 @@
             "rains"
           ],
           "answer": "has been raining",
-          "hint": "all day 表示持續一整天，It 搭配 has been raining。"
+          "hint": "主詞 It 配 has been raining，表示雨從早下到現在還在下。"
         },
         {
-          "id": "ENG_L2_13",
+          "id": "ENG_L2_14",
           "cardId": 8,
           "type": "single",
           "subUnit": "完成式時態",
-          "prompt": "【選擇題】\"I have been studying English ________ 7 hours.\" 括號中應使用 for 還是 since？",
+          "prompt": "【選擇題】\"I have been learning English ________ 5 years.\" 括號中應使用 for 還是 since？",
           "options": [
             "for",
             "since",
@@ -602,202 +667,237 @@
             "in"
           ],
           "answer": "for",
-          "hint": "7 hours 是一段時間長度，表示持續長度時介系詞使用 for。"
-        },
-        {
-          "id": "ENG_L2_14",
-          "cardId": 8,
-          "type": "single",
-          "subUnit": "完成式時態",
-          "prompt": "【選擇題】\"He has been working here ________ 2018.\" 括號中應填入？",
-          "options": [
-            "since",
-            "for",
-            "from",
-            "on"
-          ],
-          "answer": "since",
-          "hint": "2018 是具體的時間起點，表示「自從某時起」使用 since。"
+          "hint": "「5 years」是「一段時間長度」，前面必須使用介系詞 for。"
         },
         {
           "id": "ENG_L2_15",
-          "cardId": 5,
-          "type": "fill",
-          "subUnit": "現在完成式",
-          "prompt": "【填空題】請填入現在完成式形式（兩字）：I ________ (finish) my work on time.",
-          "answer": "have finished",
+          "cardId": 8,
+          "type": "single",
+          "subUnit": "完成式時態",
+          "prompt": "【選擇題】\"He has been living in Tainan ________ 2018.\" 括號中應填入？",
           "options": [
-            "have finished",
-            "has finished",
-            "am finished",
-            "finishing"
+            "since",
+            "for",
+            "during",
+            "from"
           ],
-          "hint": "I 搭配 have + finished。"
+          "answer": "since",
+          "hint": "「2018」是一個「明確的過去時間起點」，前面必須使用 since。"
         },
         {
           "id": "ENG_L2_16",
-          "cardId": 5,
-          "type": "fill",
-          "subUnit": "現在完成式",
-          "prompt": "【填空題】請填入現在完成式形式（兩字）：You ________ (see) this movie twice.",
-          "answer": "have seen",
+          "cardId": 8,
+          "type": "single",
+          "subUnit": "完成式時態",
+          "prompt": "【選擇題】\"The boys have been playing soccer ________ two hours.\" 應填入？",
           "options": [
-            "have seen",
-            "has seen",
-            "have saw",
-            "seen"
+            "for",
+            "since",
+            "before",
+            "ago"
           ],
-          "hint": "You 搭配 have + seen (see-saw-seen)。"
+          "answer": "for",
+          "hint": "「two hours」為可數的時間長度，口訣「for 一段，since 一點」，故選 for。"
         },
         {
           "id": "ENG_L2_17",
-          "cardId": 5,
-          "type": "fill",
-          "subUnit": "現在完成式",
-          "prompt": "【填空題】請填入現在完成式形式（兩字）：He ________ (eat) lunch with his classmates.",
-          "answer": "has eaten",
+          "cardId": 8,
+          "type": "single",
+          "subUnit": "完成式時態",
+          "prompt": "【選擇題】\"I haven't seen my primary school friends ________ last week.\" 應選哪一個介系詞？",
           "options": [
-            "has eaten",
-            "have eaten",
-            "has ate",
-            "eaten"
+            "since",
+            "for",
+            "in",
+            "on"
           ],
-          "hint": "He 搭配 has + eaten (eat-ate-eaten)。"
+          "answer": "since",
+          "hint": "「last week」為特定的時間點，用 since 表「自從上週以來」。"
         },
         {
           "id": "ENG_L2_18",
           "cardId": 5,
-          "type": "fill",
+          "type": "single",
           "subUnit": "現在完成式",
-          "prompt": "【填空題】請填入現在完成式形式（兩字）：She ________ (learn) English since she was five.",
-          "answer": "has learned",
+          "prompt": "【選擇題】\"I haven't finished my English homework ________.\" 否定句句尾常使用的完成式副詞為？",
           "options": [
-            "has learned",
-            "have learned",
-            "learned",
-            "learning"
+            "yet",
+            "already",
+            "ever",
+            "never"
           ],
-          "hint": "She 搭配 has + learned。"
+          "answer": "yet",
+          "hint": "yet 常用於否定句與疑問句句尾，表示「尚未」或「已經」。"
         },
         {
           "id": "ENG_L2_19",
-          "cardId": 5,
-          "type": "fill",
+          "cardId": 6,
+          "type": "single",
           "subUnit": "現在完成式",
-          "prompt": "【填空題】請填入現在完成式形式（兩字）：The machine ________ (stop) working suddenly.",
-          "answer": "has stopped",
+          "prompt": "【選擇題】動詞 \"write\" 的過去分詞 (V3) 拼寫為？",
           "options": [
-            "has stopped",
-            "have stopped",
-            "stopped",
-            "stopping"
+            "written",
+            "wrote",
+            "writing",
+            "writen"
           ],
-          "hint": "The machine 為單數，搭配 has + stopped。"
+          "answer": "written",
+          "hint": "write 的三態為 write - wrote - written，雙寫 t。"
         },
         {
           "id": "ENG_L2_20",
-          "cardId": 5,
-          "type": "fill",
-          "subUnit": "現在完成式",
-          "prompt": "【填空題】請填入現在完成式形式（兩字）：We ________ (meet) Mr. Brown before.",
-          "answer": "have met",
+          "cardId": 7,
+          "type": "single",
+          "subUnit": "現在完成進行式",
+          "prompt": "【選擇題】\"They ________ (talk) on the phone for two hours.\" 哪一個選項完全正確？",
           "options": [
-            "have met",
-            "has met",
-            "have meet",
-            "met"
+            "have been talking",
+            "has been talking",
+            "have talked",
+            "are talking"
           ],
-          "hint": "We 搭配 have + met (meet-met-met)。"
+          "answer": "have been talking",
+          "hint": "They 為複數主詞，搭配 have been talking。"
         },
         {
           "id": "ENG_L2_21",
           "cardId": 5,
           "type": "fill",
           "subUnit": "現在完成式",
-          "prompt": "【填空題】請填入現在完成式形式（兩字）：They ________ (travel) to Canada together.",
-          "answer": "have travelled",
+          "prompt": "【填空題】請填入現在完成式形式（兩字）：I ________ (finish) my science report on time.",
           "options": [
-            "have travelled",
-            "has travelled",
-            "travelled",
-            "travelling"
+            "have finished",
+            "has finished",
+            "finished"
           ],
-          "hint": "They 搭配 have + travelled。"
+          "answer": "have finished",
+          "hint": "主詞 I 配 have finished。"
         },
         {
           "id": "ENG_L2_22",
-          "cardId": 7,
+          "cardId": 5,
           "type": "fill",
-          "subUnit": "現在完成進行式",
-          "prompt": "【填空題】請填入現在完成進行式（三字）：I ________ (study) for 7 hours without rest.",
-          "answer": "have been studying",
+          "subUnit": "現在完成式",
+          "prompt": "【填空題】請填入現在完成式形式（兩字）：He ________ (eat) lunch with his best friends.",
           "options": [
-            "have been studying",
-            "has been studying",
-            "am studying",
-            "studying"
+            "has eaten",
+            "have eaten",
+            "ate"
           ],
-          "hint": "公式：have + been + studying。"
+          "answer": "has eaten",
+          "hint": "主詞 He 配 has，eat 的 V3 為 eaten，故填 has eaten。"
         },
         {
           "id": "ENG_L2_23",
-          "cardId": 7,
+          "cardId": 5,
           "type": "fill",
-          "subUnit": "現在完成進行式",
-          "prompt": "【填空題】請填入現在完成進行式（三字）：You ________ (run) in the park since morning.",
-          "answer": "have been running",
+          "subUnit": "現在完成式",
+          "prompt": "【填空題】請填入現在完成式形式（兩字）：You ________ (see) this English movie twice.",
           "options": [
-            "have been running",
-            "has been running",
-            "are running",
-            "running"
+            "have seen",
+            "has seen",
+            "saw"
           ],
-          "hint": "公式：have + been + running (run 重複 n 加 ing)。"
+          "answer": "have seen",
+          "hint": "主詞 You 配 have seen。"
         },
         {
           "id": "ENG_L2_24",
-          "cardId": 7,
+          "cardId": 5,
           "type": "fill",
-          "subUnit": "現在完成進行式",
-          "prompt": "【填空題】請填入現在完成進行式（三字）：He ________ (work) in this hospital since 2018.",
-          "answer": "has been working",
+          "subUnit": "現在完成式",
+          "prompt": "【填空題】請填入現在完成式形式（兩字）：She ________ (learn) to play the piano for four years.",
           "options": [
-            "has been working",
-            "have been working",
-            "is working",
-            "working"
+            "has learned",
+            "have learned",
+            "learns"
           ],
-          "hint": "主詞 He 搭配 has + been + working。"
+          "answer": "has learned",
+          "hint": "主詞 She 配 has learned。"
         },
         {
           "id": "ENG_L2_25",
-          "cardId": 7,
+          "cardId": 6,
           "type": "fill",
-          "subUnit": "現在完成進行式",
-          "prompt": "【填空題】請填入現在完成進行式（三字）：It ________ (rain) heavily all day.",
-          "answer": "has been raining",
+          "subUnit": "現在完成式",
+          "prompt": "【填空題】請填入現在完成式形式（兩字）：We ________ (meet) our new school principal before.",
           "options": [
-            "has been raining",
-            "have been raining",
-            "is raining",
-            "raining"
+            "have met",
+            "has met",
+            "met"
           ],
-          "hint": "主詞 It 搭配 has + been + raining。"
+          "answer": "have met",
+          "hint": "meet 的過去分詞是 met，主詞 We 配 have met。"
         },
         {
           "id": "ENG_L2_26",
+          "cardId": 5,
+          "type": "fill",
+          "subUnit": "現在完成式",
+          "prompt": "【填空題】請填入現在完成式形式（兩字）：They ________ (travel) to Japan three times.",
+          "options": [
+            "have travelled",
+            "has travelled",
+            "travelled"
+          ],
+          "answer": "have travelled",
+          "hint": "主詞 They 配 have travelled。"
+        },
+        {
+          "id": "ENG_L2_27",
           "cardId": 7,
           "type": "fill",
           "subUnit": "現在完成進行式",
-          "prompt": "【填空題】請填入現在完成進行式（三字）：We ________ (practice) cricket for two hours.",
-          "answer": "have been practicing",
+          "prompt": "【填空題】請填入現在完成進行式（三字）：I ________ (study) for 7 hours without taking a break.",
+          "options": [
+            "have been studying",
+            "has been studying",
+            "am studying"
+          ],
+          "answer": "have been studying",
+          "hint": "主詞 I 配 have been studying。"
+        },
+        {
+          "id": "ENG_L2_28",
+          "cardId": 7,
+          "type": "fill",
+          "subUnit": "現在完成進行式",
+          "prompt": "【填空題】請填入現在完成進行式（三字）：He ________ (work) in this high school since 2018.",
+          "options": [
+            "has been working",
+            "have been working",
+            "is working"
+          ],
+          "answer": "has been working",
+          "hint": "主詞 He 配 has been working。"
+        },
+        {
+          "id": "ENG_L2_29",
+          "cardId": 7,
+          "type": "fill",
+          "subUnit": "現在完成進行式",
+          "prompt": "【填空題】請填入現在完成進行式（三字）：It ________ (rain) heavily all day long.",
+          "options": [
+            "has been raining",
+            "have been raining",
+            "is raining"
+          ],
+          "answer": "has been raining",
+          "hint": "主詞 It 配 has been raining。"
+        },
+        {
+          "id": "ENG_L2_30",
+          "cardId": 7,
+          "type": "fill",
+          "subUnit": "現在完成進行式",
+          "prompt": "【填空題】請填入現在完成進行式（三字）：We ________ (practice) our graduation song for two hours.",
           "options": [
             "have been practicing",
             "has been practicing",
-            "are practicing",
-            "practicing"
+            "are practicing"
           ],
-          "hint": "主詞 We 搭配 have + been + practicing。"
+          "answer": "have been practicing",
+          "hint": "主詞 We 配 have been practicing。"
         }
       ]
     }

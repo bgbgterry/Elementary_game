@@ -314,8 +314,15 @@
     const idiom1Levels = IDIOM_DATA_1_6.levels || [];
     const idiom2Levels = IDIOM_DATA_7_12.levels || [];
     const sciLevels = SCI_DATA.levels || [];
-    const totalLevels = idiom1Levels.length + idiom2Levels.length + sciLevels.length;
-    const passedTotal = p.idiom.passedLevels.length + p.idiom_7_12.passedLevels.length + p.science.passedLevels.length;
+    const sci3Levels = SCI_DATA_3.levels || [];
+    const engLevels = ENG_DATA.levels || [];
+    const totalLevels = idiom1Levels.length + idiom2Levels.length + sciLevels.length + sci3Levels.length + engLevels.length;
+    const passedTotal =
+      p.idiom.passedLevels.length +
+      p.idiom_7_12.passedLevels.length +
+      p.science.passedLevels.length +
+      ((p.science_3 && p.science_3.passedLevels) || []).length +
+      ((p.english && p.english.passedLevels) || []).length;
 
     const allIdioms1 = getAllIdiomCards("idiom");
     const allIdioms2 = getAllIdiomCards("idiom_7_12");
@@ -680,8 +687,8 @@
       <section class="subject-section eng-sec">
         <div class="sec-header">
           <div class="sec-title-group">
-            <span class="sec-badge eng">國小四年級英文・文法專題</span>
-            <h2>🔤 英文文法筆記與闖關（現在式四大時態 Present Tenses）</h2>
+            <span class="sec-badge eng">國小六年級英文・文法專題</span>
+            <h2>🔤 英文文法筆記與闖關（小六現在式四大時態 Present Tenses）</h2>
           </div>
           <div style="display:flex;gap:8px;flex-wrap:wrap">
             ${passedCount >= levels.length ? `<button type="button" class="pill-btn warn-btn" data-open-cert="english">🏆 領取英文榮譽證書</button>` : ""}
@@ -1379,11 +1386,16 @@
     });
   }
 
+  function getSubjLevels(subj) {
+    if (subj === "idiom_7_12") return IDIOM_DATA_7_12.levels || [];
+    if (subj === "idiom") return IDIOM_DATA_1_6.levels || [];
+    if (subj === "science_3") return SCI_DATA_3.levels || [];
+    if (subj === "english") return ENG_DATA.levels || [];
+    return SCI_DATA.levels || [];
+  }
+
   function startQuiz(subj, levelNum, customQuestions, customTitle) {
-    let levels = [];
-    if (subj === "idiom_7_12") levels = IDIOM_DATA_7_12.levels;
-    else if (subj === "idiom") levels = IDIOM_DATA_1_6.levels;
-    else levels = SCI_DATA.levels;
+    const levels = getSubjLevels(subj);
 
     const lvObj = levels.find((l) => l.level === levelNum) || levels[0];
     const questions = customQuestions
@@ -1392,7 +1404,7 @@
           c.shuffledOptions = shuffleArray(c.options || []);
           return c;
         })
-      : sampleAdaptiveQuestions(subj, lvObj.questions || [], QUESTIONS_PER_ROUND);
+      : sampleAdaptiveQuestions(subj, (lvObj && lvObj.questions) || [], QUESTIONS_PER_ROUND);
 
     state.view = "quiz";
     state.quiz = {
@@ -1414,7 +1426,15 @@
 
     if (!customQuestions) {
       const p = curPlayer();
-      const prefix = subj === "idiom_7_12" ? "四上成語(7~12課)" : subj === "idiom" ? "四上成語(1~6課)" : "四上自然";
+      const prefix = subj === "idiom_7_12"
+        ? "四上成語(7~12課)"
+        : subj === "idiom"
+        ? "四上成語(1~6課)"
+        : subj === "english"
+        ? "小六英文文法"
+        : subj === "science_3"
+        ? "四上自然第3課"
+        : "四上自然(1~2課)";
       p.lastActivity = {
         type: "quiz",
         subj: subj,
@@ -1811,13 +1831,18 @@
     const total = qz.questions.length || 10;
     const score = Math.round((qz.correctCount / total) * 100);
     const passed = qz.correctCount >= Math.min(PASS_SCORE, total);
-    let levels = [];
-    if (qz.subj === "idiom_7_12") levels = IDIOM_DATA_7_12.levels;
-    else if (qz.subj === "idiom") levels = IDIOM_DATA_1_6.levels;
-    else levels = SCI_DATA.levels;
+    const levels = getSubjLevels(qz.subj);
 
     const hasNextLevel = !qz.isCustomMistakeQuiz && levels.some((l) => l.level === qz.level + 1);
-    const nextBtnCls = qz.subj === "idiom_7_12" ? "idiom2-btn" : (qz.subj === "idiom" ? "idiom-btn" : "sci-btn");
+    const nextBtnCls = qz.subj === "idiom_7_12"
+      ? "idiom2-btn"
+      : qz.subj === "idiom"
+      ? "idiom-btn"
+      : qz.subj === "english"
+      ? "eng-btn"
+      : qz.subj === "science_3"
+      ? "sci3-btn"
+      : "sci-btn";
 
     container.innerHTML = `
       <div class="quiz-container">
@@ -1871,6 +1896,8 @@
     const idiom1Mistakes = Object.entries(p.idiom.mistakes).map(([k, v]) => Object.assign({ key: k }, v));
     const idiom2Mistakes = Object.entries(p.idiom_7_12.mistakes).map(([k, v]) => Object.assign({ key: k }, v));
     const sciMistakes = Object.entries(p.science.mistakes).map(([k, v]) => Object.assign({ key: k }, v));
+    const sci3Mistakes = Object.entries((p.science_3 && p.science_3.mistakes) || {}).map(([k, v]) => Object.assign({ key: k }, v));
+    const engMistakes = Object.entries((p.english && p.english.mistakes) || {}).map(([k, v]) => Object.assign({ key: k }, v));
 
     let combined = [];
     if (state.mistakeSubj === "all" || state.mistakeSubj === "idiom") combined = combined.concat(idiom1Mistakes);
@@ -1884,7 +1911,7 @@
     }
     combined.sort((a, b) => (b.wrongCount || 1) - (a.wrongCount || 1));
 
-    const totalAll = idiom1Mistakes.length + idiom2Mistakes.length + sciMistakes.length;
+    const totalAll = idiom1Mistakes.length + idiom2Mistakes.length + sciMistakes.length + sci3Mistakes.length + engMistakes.length;
 
     container.innerHTML = `
       <div class="view-header">
